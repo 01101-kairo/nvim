@@ -1,30 +1,32 @@
 local g = vim.g
+local a = vim.api
 local opt = vim.opt
 local cmd = vim.cmd
 local set = vim.api.nvim_set_keymap
 local ns = {noremap=true, silent=true}
 
 -- set nocompatible
-cmd([[
-syntax on
-filetype on
-filetype plugin on
-filetype indent on
-filetype plugin indent on
+a.nvim_command("syntax on")
+a.nvim_command("filetype on")
+a.nvim_command("filetype plugin on")
+a.nvim_command("filetype indent on")
+a.nvim_command("filetype plugin indent on")
+a.nvim_command("set diffopt& diffopt+=algorithm:histogram,indent-heuristic")
+a.nvim_command("set rtp+=~/.fzf")			-- vc sabe oq é isso?
+a.nvim_command("set is hls ic scs")		-- opções de busca
+a.nvim_command("set nocompatible")			-- be improved, required
+a.nvim_command("set nowrap")					-- linha longa
+a.nvim_command("set bs=2")					-- para o backspace se comportar como a gente gosta
+a.nvim_command("set t_Co=256")				-- real ñ sei pq isso mas eu gosto de me previnir com relação a cores
+a.nvim_command("set signcolumn=yes")
+a.nvim_command("set encoding=utf8")			-- sou br é eu escrevo em portugues eu acho
 
-set diffopt& diffopt+=algorithm:histogram,indent-heuristic
-set rtp+=~/.fzf			"vc sabe oq é isso?
-set is hls ic scs		"opções de busca
+-- opt.fdm=marke			-- o modo como o folding deverá trabalhar
+-- opt.eb=true					-- ná morauzinha eu ñ sei oq isso faz
+-- opt.laststatus=2			-- parece q eu ñ precisso disso mas deixa ai
+-- opt.wildmode=longest,list	-- para completar com TAB igualzinho o bash faz
 
-set colorcolumn=100
-set nocompatible			"be improved, required
-set nowrap					"linha longa
-set bs=2					"para o backspace se comportar como a gente gosta
-set encoding=UTF-8
-set t_Co=256				"real ñ sei pq isso mas eu gosto de me previnir com relação a cores
-set signcolumn=yes
-set encoding=utf8			"sou br é eu escrevo em portugues eu acho
-]])
+opt.colorcolumn = '80'
 opt.guifont={"DejaVuSansMono Nerd Font","Mono:h12"}
 opt.number=true				-- só pra eu saber qual linha eu to
 opt.tw=79
@@ -35,7 +37,6 @@ opt.cursorline=true			-- ondiéqueeuto
 opt.updatetime=300			--mensagem de erro
 opt.clipboard=unnamedplus	-- compartilhamento de área de trasferencia
 opt.sm=true					-- mostra o início do bloco que acabou de ser fechado, sm é o mesmo que ShowMatch
-opt.wildmode=longest,list	-- para completar com TAB igualzinho o bash faz
 opt.ai=true					-- auto indent
 opt.shiftwidth=4			-- numero de espaço usado quando rolar o autoindent
 opt.softtabstop=4			-- numero de espaços que deve-se dar quando apertar o TAB
@@ -57,9 +58,6 @@ opt.smartindent=true		-- ativa autoindent da linguagens que eu tiver trabalhondo
 opt.wildmenu=true			-- menuzinho de completar comandos vim
 opt.mouse='a'				-- isso memo mouse no vim hooooo
 opt.confirm=true			-- confirma exit
--- opt.fdm=marke			-- o modo como o folding deverá trabalhar
--- opt.eb=true					-- ná morauzinha eu ñ sei oq isso faz
--- opt.laststatus=2			-- parece q eu ñ precisso disso mas deixa ai
 
 -- Key Map
 set("n","<F7>",":set foldmethod=indent<CR>",ns)
@@ -104,16 +102,6 @@ augroup java
 	autocmd BufReadPost,BufWritePost *.java :NeomakeFile
 augroup end]])
 
--- Macros
-vim.cmd([[
-autocmd FileType html inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
-"inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
-"inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-	]])
-
--- SuperTab
-g['SuperTabDefaultCompletionType'] = '<c-n>'
-
 -- ULtiSnips
 g['ULtiSnipsEditSplit'] = 'vertical'
 g['ULtiSnipsJumpForwardTrigger'] = '<TAB>'
@@ -156,6 +144,8 @@ let g:ale_c_clangformat_options = '"-style={
 g['ale_fix_on_save'] = 1
 g['ale_completetion_enable'] = 0
 g['neocomplete#enable_at_startup'] = 1
+g['loaded_node_provider'] = 0
+g['loaded_perl_provider'] = 0
 -- Themes
 vim.cmd([[
 if exists('+termguicolors')
@@ -200,3 +190,30 @@ require("indent_blankline").setup {
 		"IndentBlanklineIndent6",
 	},
 }
+
+-- SuperTab
+g['SuperTabDefaultCompletionType'] = '<c-n>'
+
+cmd([[imap <C-l> <Plug>(coc-snippets-expand)]])		--Use <C-l> for trigger snippet expand.
+cmd([[vmap <C-j> <Plug>(coc-snippets-select)]])		--Use <C-j> for select text for visual placeholder of snippet.
+g['coc_snippet_next']= '<C-j>'			--Use <C-j> for jump to next placeholder, it's default of coc.nvim
+g['coc_snippet_prev']= '<c-k>'			--Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+cmd([[imap <C-j> <Plug>(coc-snippets-expand-jump)]])	--Use <C-j> for both expand and jump (make expand higher priority.)
+cmd([[xmap <leader>x  <Plug>(coc-convert-snippet)]])	--Use <leader>x for convert visual selected code to snippet
+
+-- Macros
+vim.cmd([[autocmd FileType html inoremap <Space><Space> <Esc>/<++><Enter>"_c4l]])
+
+cmd([[
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackSpace() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! CheckBackSpace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>']])
