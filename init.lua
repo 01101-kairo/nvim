@@ -61,7 +61,7 @@ opt.confirm=true			-- confirma exit
 
 -- Key Map
 set("n","<F7>",":set foldmethod=indent<CR>",ns)
-set("n","<F5>",":call Executar(shellescape(@%, 1))<CR>",ns)
+set("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
 set("n","<C-s>",":w<CR>",ns)
 -- set("n","<C-i>",":set foldmethod=indent<CR>",ns)
 set("n","<C-h>",":NERDTreeToggle<CR>",ns)
@@ -76,31 +76,13 @@ set("n","<C-j>","<C-w>j",ns)
 set("n","<C-k>","<C-w>k",ns)
 set("n","<C-l>","<C-w>l",ns)
 
--- Run COD
-vim.cmd([[
-
-function! Executar(arq)
-	:w
-	if &filetype == 'html'
-		:Bracey
-	elseif &filetype == 'Java'
-		:!javac '%' && java '%'
-	elseif &filetype == 'markdown'
-		:exec '!glow' a:arq
-	elseif &filetype == 'python'
-		:exec '!python3' a:arq
-	elseif &filetype == 'c'
-		:exec '!clang -o /tmp/a.out' a:arq ';/tmp/a.out'
-	endif
-endfunctio]])
-
 -- Java
-vim.cmd([[
-augroup java
-	au!
-	autocmd FileType java setlocal omnifunc=javacomplete#Complete
-	autocmd BufReadPost,BufWritePost *.java :NeomakeFile
-augroup end]])
+-- vim.cmd([[
+-- augroup java
+-- 	au!
+-- 	autocmd FileType java setlocal omnifunc=javacomplete#Complete
+-- 	autocmd BufReadPost,BufWritePost *.java :NeomakeFile
+-- augroup end]])
 
 -- ULtiSnips
 g['ULtiSnipsEditSplit'] = 'vertical'
@@ -109,12 +91,6 @@ g['ULtiSnipsJumpBackwardTrigger'] = '<s-TAB>'
 
 -- coc
 g['coc_force_debug'] = 1
-
--- buffers
-g['airline#extensions#tabline#formatter'] = 'unique_tail'
-g['airline#extensions#tabline#enabled'] = 1
-g['airline#extensions#tabline#left_sep'] = ' '
-g['airline#extensions#tabline#left_alt_sep'] = '|'
 
 -- ale
 vim.cmd([[
@@ -146,50 +122,6 @@ g['ale_completetion_enable'] = 0
 g['neocomplete#enable_at_startup'] = 1
 g['loaded_node_provider'] = 0
 g['loaded_perl_provider'] = 0
--- Themes
-vim.cmd([[
-if exists('+termguicolors')
-	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif]])
-
-g['sonokai_style'] = 'andromeda'
-g['sonokai_enable_italic'] = 1
-g['sonokai_disable_italic_comment'] = 0
-g['sonokai_diagnostic_line_highlight'] = 1
-g['sonokai_current_word'] = 'bold'
-
-vim.cmd([[
-packadd! sonokai
-colorscheme sonokai
-
-if (has("nvim")) "Transparent background. Only for nvim
-	highlight Normal guibg=NONE ctermbg=NONE
-	highlight EndOfBuffer guibg=NONE ctermbg=NONE
-endi]])
-
-vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-
-vim.opt.list = true
-vim.opt.listchars:append "space:⋅"
-vim.opt.listchars:append "eol:↴"
-
-require("indent_blankline").setup {
-	space_char_blankline = " ",
-	char_highlight_list = {
-		"IndentBlanklineIndent1",
-		"IndentBlanklineIndent2",
-		"IndentBlanklineIndent3",
-		"IndentBlanklineIndent4",
-		"IndentBlanklineIndent5",
-		"IndentBlanklineIndent6",
-	},
-}
 
 -- SuperTab
 g['SuperTabDefaultCompletionType'] = '<c-n>'
@@ -217,3 +149,69 @@ function! CheckBackSpace() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>']])
+
+-- Themes
+g['airline#extensions#tabline#formatter'] = 'unique_tail'
+g['airline#extensions#tabline#enabled'] = 1
+g['airline#extensions#tabline#left_sep'] = ' '
+g['airline#extensions#tabline#left_alt_sep'] = '|'
+
+vim.cmd([[
+if exists('+termguicolors')
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif]])
+
+g['sonokai_style'] = 'andromeda'
+g['sonokai_enable_italic'] = 1
+g['sonokai_disable_italic_comment'] = 0
+g['sonokai_diagnostic_line_highlight'] = 1
+g['sonokai_current_word'] = 'bold'
+
+vim.cmd([[
+packadd! sonokai
+colorscheme sonokai
+
+if (has("nvim")) "Transparent background. Only for nvim
+	highlight Normal guibg=NONE ctermbg=NONE
+	highlight EndOfBuffer guibg=NONE ctermbg=NONE
+endi]])
+
+vim.opt.list = true
+vim.opt.listchars:append "space:⋅"
+vim.opt.listchars:append "eol:↴"
+
+vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+
+require("indent_blankline").setup {
+	space_char_blankline = " ",
+	char_highlight_list = {
+		"IndentBlanklineIndent1",
+		"IndentBlanklineIndent2",
+		"IndentBlanklineIndent3",
+		"IndentBlanklineIndent4",
+		"IndentBlanklineIndent5",
+		"IndentBlanklineIndent6",
+	},
+}
+
+-- Run COD
+vim.cmd([[function! Run(arq)
+	:w
+	if &filetype == 'html'
+		:Bracey
+	elseif &filetype == 'Java'
+		:!javac '%' && java '%'
+	elseif &filetype == 'markdown'
+		:exec '!glow' a:arq
+	elseif &filetype == 'python'
+		:exec '!python3' a:arq
+	elseif &filetype == 'c'
+		:exec '!clang -o /tmp/a.out' a:arq ';/tmp/a.out'
+	endif
+endfunctio]])
