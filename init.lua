@@ -25,22 +25,25 @@ a.nvim_command("set encoding=utf8")			-- sou br é eu escrevo em portugues eu ac
 -- opt.eb=true					-- ná morauzinha eu ñ sei oq isso faz
 -- opt.laststatus=2			-- parece q eu ñ precisso disso mas deixa ai
 -- opt.wildmode=longest,list	-- para completar com TAB igualzinho o bash faz
-opt.colorcolumn = '80'
+vim.o.clipboard = 'unnamedplus'	-- compartilhamento de área de trasferencia
 opt.guifont={"DejaVuSansMono Nerd Font","Mono:h12"}
-opt.number=true				-- só pra eu saber qual linha eu to
+opt.termencoding=utf8		-- Yeah!! UTF-8 em tudo!
+opt.mouse='a'				-- isso memo mouse no vim hooooo
+opt.colorcolumn = '80'
 opt.tw=79
-opt.termguicolors=true
 opt.history=500				-- 500 é um numero grande
-opt.cindent=true			-- indentação no estilo C
-opt.cursorline=true			-- ondiéqueeuto
 opt.updatetime=300			--mensagem de erro
-opt.clipboard=unnamedplus	-- compartilhamento de área de trasferencia
-opt.sm=true					-- mostra o início do bloco que acabou de ser fechado, sm é o mesmo que ShowMatch
-opt.ai=true					-- auto indent
 opt.shiftwidth=4			-- numero de espaço usado quando rolar o autoindent
 opt.softtabstop=4			-- numero de espaços que deve-se dar quando apertar o TAB
 opt.tabstop=4				-- numero de espações que deve-se voltando quando apertar o backspace num tab
-opt.termencoding=utf8		-- Yeah!! UTF-8 em tudo!
+opt.scrolloff=8
+opt.cmdheight=2
+opt.number=true				-- só pra eu saber qual linha eu to
+opt.termguicolors=true
+opt.cindent=true			-- indentação no estilo C
+opt.cursorline=true			-- ondiéqueeuto
+opt.sm=true					-- mostra o início do bloco que acabou de ser fechado, sm é o mesmo que ShowMatch
+opt.ai=true					-- auto indent
 opt.relativenumber=true		-- numero relativo (esses numeros mudando)
 opt.hidden=true
 opt.incsearch=true			-- isso aqui é pra 'pesquisa' ele completa palavras
@@ -49,13 +52,10 @@ opt.smartcase=true
 opt.splitright=true			-- Create the vertical splits to the right
 opt.splitbelow=true			-- Create the horizontal splits below
 opt.autoread=true			-- Update vim after file update from outside
-opt.scrolloff=8
 opt.title=true				-- exibe alguma coisa na bara do terminal
-opt.cmdheight=2
 opt.autoindent=true			-- aoutoindent
 opt.smartindent=true		-- ativa autoindent da linguagens que eu tiver trabalhondo
 opt.wildmenu=true			-- menuzinho de completar comandos vim
-opt.mouse='a'				-- isso memo mouse no vim hooooo
 opt.confirm=true			-- confirma exit
 
 -- Key Map
@@ -106,7 +106,6 @@ let g:ale_fixers = {
 			\   'c': ['clang-format'],
 			\}
 
-"C/C++
 let g:ale_c_clangformat_options = '"-style={
 			\ BasedOnStyle: google,
 			\ IndentWidth: 2,
@@ -116,6 +115,7 @@ let g:ale_c_clangformat_options = '"-style={
 			\ FixNamespaceComments: true,
 			\ ReflowComments: false,
 			\ }"']])
+
 g['ale_fix_on_save'] = 1
 g['ale_completetion_enable'] = 0
 g['neocomplete#enable_at_startup'] = 1
