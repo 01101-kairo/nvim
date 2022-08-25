@@ -25,7 +25,6 @@ a.nvim_command("set encoding=utf8")			-- sou br é eu escrevo em portugues eu ac
 -- opt.eb=true					-- ná morauzinha eu ñ sei oq isso faz
 -- opt.laststatus=2			-- parece q eu ñ precisso disso mas deixa ai
 -- opt.wildmode=longest,list	-- para completar com TAB igualzinho o bash faz
-
 opt.colorcolumn = '80'
 opt.guifont={"DejaVuSansMono Nerd Font","Mono:h12"}
 opt.number=true				-- só pra eu saber qual linha eu to
@@ -128,20 +127,19 @@ g['SuperTabDefaultCompletionType'] = '<c-n>'
 
 cmd([[imap <C-l> <Plug>(coc-snippets-expand)]])		--Use <C-l> for trigger snippet expand.
 cmd([[vmap <C-j> <Plug>(coc-snippets-select)]])		--Use <C-j> for select text for visual placeholder of snippet.
-g['coc_snippet_next']= '<C-j>'			--Use <C-j> for jump to next placeholder, it's default of coc.nvim
-g['coc_snippet_prev']= '<c-k>'			--Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+g['coc_snippet_next']= '<C-j>'						--Use <C-j> for jump to next placeholder, it's default of coc.nvim
+g['coc_snippet_prev']= '<c-k>'						--Use <C-k> for jump to previous placeholder, it's default of coc.nvim
 cmd([[imap <C-j> <Plug>(coc-snippets-expand-jump)]])	--Use <C-j> for both expand and jump (make expand higher priority.)
 cmd([[xmap <leader>x  <Plug>(coc-convert-snippet)]])	--Use <leader>x for convert visual selected code to snippet
 
 -- Macros
 vim.cmd([[autocmd FileType html inoremap <Space><Space> <Esc>/<++><Enter>"_c4l]])
 
-cmd([[
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ CheckBackSpace() ? "\<TAB>" :
-      \ coc#refresh()
+cmd([[inoremap <silent><expr> <TAB>
+	  \ coc#pum#visible() ? coc#_select_confirm() :
+	  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	  \ CheckBackSpace() ? "\<TAB>" :
+	  \ coc#refresh()
 
 function! CheckBackSpace() abort
   let col = col('.') - 1
