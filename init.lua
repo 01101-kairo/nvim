@@ -1,25 +1,25 @@
 local g = vim.g
-local a = vim.api
+local api = vim.api
 local opt = vim.opt
 local cmd = vim.cmd
-local set = vim.api.nvim_set_keymap
+local keymap = vim.api.nvim_set_keymap
 local ns = {noremap=true, silent=true}
 
 -- set nocompatible
-a.nvim_command("syntax on")
-a.nvim_command("filetype on")
-a.nvim_command("filetype plugin on")
-a.nvim_command("filetype indent on")
-a.nvim_command("filetype plugin indent on")
-a.nvim_command("set diffopt& diffopt+=algorithm:histogram,indent-heuristic")
-a.nvim_command("set rtp+=~/.fzf")			-- vc sabe oq é isso?
-a.nvim_command("set is hls ic scs")		-- opções de busca
-a.nvim_command("set nocompatible")			-- be improved, required
-a.nvim_command("set nowrap")					-- linha longa
-a.nvim_command("set bs=2")					-- para o backspace se comportar como a gente gosta
-a.nvim_command("set t_Co=256")				-- real ñ sei pq isso mas eu gosto de me previnir com relação a cores
-a.nvim_command("set signcolumn=yes")
-a.nvim_command("set encoding=utf8")			-- sou br é eu escrevo em portugues eu acho
+api.nvim_command("syntax on")
+api.nvim_command("filetype on")
+api.nvim_command("filetype plugin on")
+api.nvim_command("filetype indent on")
+api.nvim_command("filetype plugin indent on")
+api.nvim_command("set diffopt& diffopt+=algorithm:histogram,indent-heuristic")
+api.nvim_command("set rtp+=~/.fzf")			-- vc sabe oq é isso?
+api.nvim_command("set is hls ic scs")		-- opções de busca
+api.nvim_command("set nocompatible")			-- be improved, required
+api.nvim_command("set nowrap")					-- linha longa
+api.nvim_command("set bs=2")					-- para o backspace se comportar como a gente gosta
+api.nvim_command("set t_Co=256")				-- real ñ sei pq isso mas eu gosto de me previnir com relação a cores
+api.nvim_command("set signcolumn=yes")
+api.nvim_command("set encoding=utf8")			-- sou br é eu escrevo em portugues eu acho
 
 -- opt.fdm=marke			-- o modo como o folding deverá trabalhar
 -- opt.eb=true					-- ná morauzinha eu ñ sei oq isso faz
@@ -38,8 +38,8 @@ opt.softtabstop=4			-- numero de espaços que deve-se dar quando apertar o TAB
 opt.tabstop=4				-- numero de espações que deve-se voltando quando apertar o backspace num tab
 opt.scrolloff=8
 opt.cmdheight=2
-opt.number=true				-- só pra eu saber qual linha eu to
 opt.termguicolors=true
+opt.number=true				-- só pra eu saber qual linha eu to
 opt.cindent=true			-- indentação no estilo C
 opt.cursorline=true			-- ondiéqueeuto
 opt.sm=true					-- mostra o início do bloco que acabou de ser fechado, sm é o mesmo que ShowMatch
@@ -59,21 +59,21 @@ opt.wildmenu=true			-- menuzinho de completar comandos vim
 opt.confirm=true			-- confirma exit
 
 -- Key Map
-set("n","<F7>",":set foldmethod=indent<CR>",ns)
-set("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
-set("n","<C-s>",":w<CR>",ns)
--- set("n","<C-i>",":set foldmethod=indent<CR>",ns)
-set("n","<C-h>",":NERDTreeToggle<CR>",ns)
--- set("n","<C-n>",":tabnew ",ns)
-set("n","<C-q>",":bp |bd #<CR>",ns)
-set("n","<M-l>",":bn<CR>",ns)
-set("n","<M-h>",":bp<CR>",ns)
-set("n","<space>"," za",ns)
+keymap("n","<F7>",":set foldmethod=indent<CR>",ns)
+keymap("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
+keymap("n","<C-s>",":w<CR>",ns)
+-- keymap("n","<C-i>",":set foldmethod=indent<CR>",ns)
+keymap("n","<C-h>",":NERDTreeToggle<CR>",ns)
+-- keymap("n","<C-n>",":tabnew ",ns)
+keymap("n","<C-q>",":bp |bd #<CR>",ns)
+keymap("n","<M-l>",":bn<CR>",ns)
+keymap("n","<M-h>",":bp<CR>",ns)
+keymap("n","<space>"," za",ns)
 
 -- Shortcuts for split navigation
-set("n","<C-j>","<C-w>j",ns)
-set("n","<C-k>","<C-w>k",ns)
-set("n","<C-l>","<C-w>l",ns)
+keymap("n","<C-j>","<C-w>j",ns)
+keymap("n","<C-k>","<C-w>k",ns)
+keymap("n","<C-l>","<C-w>l",ns)
 
 -- Java
 -- vim.cmd([[
@@ -132,9 +132,6 @@ g['coc_snippet_prev']= '<c-k>'						--Use <C-k> for jump to previous placeholder
 cmd([[imap <C-j> <Plug>(coc-snippets-expand-jump)]])	--Use <C-j> for both expand and jump (make expand higher priority.)
 cmd([[xmap <leader>x  <Plug>(coc-convert-snippet)]])	--Use <leader>x for convert visual selected code to snippet
 
--- Macros
-vim.cmd([[autocmd FileType html inoremap <Space><Space> <Esc>/<++><Enter>"_c4l]])
-
 cmd([[inoremap <silent><expr> <TAB>
 	  \ coc#pum#visible() ? coc#_select_confirm() :
 	  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
@@ -175,16 +172,16 @@ if (has("nvim")) "Transparent background. Only for nvim
 	highlight EndOfBuffer guibg=NONE ctermbg=NONE
 endi]])
 
-vim.opt.list = true
-vim.opt.listchars:append "space:⋅"
-vim.opt.listchars:append "eol:↴"
+cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
-vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+opt.list = true
+opt.listchars:append "space:⋅"
+opt.listchars:append "eol:↴"
 
 require("indent_blankline").setup {
 	space_char_blankline = " ",
