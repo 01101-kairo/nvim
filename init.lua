@@ -80,7 +80,7 @@ g['ULtiSnipsEditSplit'] = 'vertical'
 g['ULtiSnipsJumpForwardTrigger'] = '<TAB>'
 g['ULtiSnipsJumpBackwardTrigger'] = '<s-TAB>'
 
--- ale
+-------------------------------------------------------------------------- ale
 vim.cmd([[let g:ale_linters = {
             \	'python': ['flake8', 'pylint'],
             \	'javascript': ['eslint'],
