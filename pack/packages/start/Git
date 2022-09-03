@@ -14,7 +14,8 @@ $gc "https://github.com/neomake/neomake.git" &&\
 $gc "https://github.com/preservim/nerdtree.git" &&\
 $gc "https://github.com/norcalli/nvim-colorizer.lua.git" &&\
 $gc "https://github.com/sainnhe/sonokai.git" &&\
-$gc "https://github.com/rstacruz/sparkup.git" &&\
+# $gc "https://github.com/rstacruz/sparkup.git" &&\
+$gc "https://github.com/rafamadriz/friendly-snippets.git" &&\
 $gc "https://github.com/ervandew/supertab.git" &&\
 $gc "https://github.com/vim-airline/vim-airline.git" &&\
 $gc "https://github.com/tpope/vim-commentary.git" &&\
@@ -22,7 +23,7 @@ $gc "https://github.com/ap/vim-css-color.git" &&\
 $gc "https://github.com/ryanoasis/vim-devicons.git" &&\
 $gc "https://github.com/dag/vim-fish.git" &&\
 $gc "https://github.com/tpope/vim-fugitive.git" &&\
-$gc "https://github.com/prabirshrestha/vim-lsp.git" &&\
+# $gc "https://github.com/prabirshrestha/vim-lsp.git" &&\
 $gc "https://github.com/sheerun/vim-polyglot.git" &&\
 $gc "https://github.com/lambdalisue/vim-unified-diff.git" &&\
 $gc "https://github.com/puremourning/vimspector.git"
