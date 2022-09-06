@@ -1,7 +1,7 @@
 <hr>
 <p align="center">
   <img align="center" src="https://img.shields.io/badge/vim-00aa00?style=for-the-badge&logo=vim&logoColor=white">
-  <--<img alt="Vim" src="Vim.png" height="190" width="455">-->
+  <!--<img alt="Vim" src="Vim.png" height="190" width="455">-->
 </p>
 <hr>
 
