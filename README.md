@@ -21,6 +21,7 @@
 * [Cola](#Cola)
 * [Recorta](#Recorta)
 * [Junta](#junta)
+* [vim-emmet](#vim-emmet)
 
 # Abrir_o_Vim
 ```
@@ -173,36 +174,34 @@ d+ recorta da reposição atual
 ```
 J junta duas linhas
 ```
-## Vim emmet
-Examples
---------
+## vim-emmet
 
-**`div`** expands to:
+**`div`**
 
 ```html
 <div></div>
 ```
 
-**`div#header`** expands to:
+**`div#header`**
 
 ```html
     <div id="header"></div>
 ```
 
-**`div.align-left#header`** expands to:
+**`div.align-left#header`**
 
 ```html
     <div id="header" class="align-left"></div>
 ```
 
-**`div#header + div#footer`** expands to:
+**`div#header + div#footer`**
 
 ```html
     <div id="header"></div>
     <div id="footer"></div>
 ```
 
-**`#menu > ul`** expands to:
+**`#menu > ul`**
 
 ```html
     <div id="menu">
@@ -210,7 +209,7 @@ Examples
     </div>
 ```
 
-**`#menu > h3 + ul`** expands to:
+**`#menu > h3 + ul`**
 
 ```html
     <div id="menu">
@@ -219,7 +218,7 @@ Examples
     </div>
 ```
 
-**`#header > h1{Welcome to our site}`** expands to:
+**`#header > h1{Welcome to our site}`**
 
 ```html
     <div id="header">
@@ -227,13 +226,13 @@ Examples
     </div>
 ```
 
-**`a[href=index.html]{Home}`** expands to:
+**`a[href=index.html]{Home}`**
 
 ```html
     <a href="index.html">Home</a>
 ```
 
-**`ul > li*3`** expands to:
+**`ul > li*3`**
 
 ```html
     <ul>
@@ -243,7 +242,7 @@ Examples
     </ul>
 ```
 
-**`ul > li.item-$*3`** expands to:
+**`ul > li.item-$*3`**
 
 ```html
     <ul>
@@ -253,7 +252,7 @@ Examples
     </ul>
 ```
 
-**`ul > li.item-$*3 > strong`** expands to:
+**`ul > li.item-$*3 > strong`**
 
 ```html
     <ul>
@@ -263,7 +262,7 @@ Examples
     </ul>
 ```
 
-**`table > tr*2 > td.name + td*3`** expands to:
+**`table > tr*2 > td.name + td*3`**
 
 ```html
     <table>
@@ -282,7 +281,7 @@ Examples
     </table>
 ```
 
-**`#header > ul > li < p{Footer}`** expands to:
+**`#header > ul > li < p{Footer}`**
 
 ```html
     <!-- The < symbol goes back up the parent; i.e., the opposite of >. -->
