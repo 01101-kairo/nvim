@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Vim" src="Vim.png" height="190" width="455" alt="logo do vim">
+  <img alt="Vim" src="Vim.png" height="300" width="200" alt="logo do vim">
 </p>
 <hr>
 
