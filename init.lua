@@ -129,8 +129,9 @@ g['loaded_node_provider'] = 0
 g['loaded_perl_provider'] = 0
 -------------------------------------------------- Rainbow Parentheses Improved
 g['rainbow_active'] = 1
-g['parentheses_active'] = 1
-g['improved_active'] = 1
+cmd([[
+let g:rainbow_conf = {'separately': {'html': 0, }}
+]])
 --------------------------------------------------------------------------- Coc
 cmd([[inoremap <silent><expr> <TAB>
           \ coc#pum#visible() ? coc#_select_confirm() :
