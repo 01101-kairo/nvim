@@ -44,8 +44,8 @@ opt.scrolloff=8
 opt.cmdheight=2
 opt.termguicolors=true
 opt.list = true
--- opt.listchars:append "space:⋅"
 opt.listchars:append "eol:↴"
+-- opt.listchars:append "space:⋅"
 opt.hidden=true
 opt.expandtab=true
 opt.number=true				-- só pra eu saber qual linha eu to
@@ -91,42 +91,39 @@ keymap("n","<C-j>","<C-w>j",ns)
 keymap("n","<C-k>","<C-w>k",ns)
 keymap("n","<C-l>","<C-w>l",ns)
 --------------------------------------------------------------------------- Coc
-cmd([[
-inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
-inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-]])
+cmd([[inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]])
+cmd([[inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"]])
+cmd([[inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]])
 -------------------------------------------------------------------------- ale
-cmd([[
-    let g:ale_linters = {
-            \	'python': ['flake8', 'pylint'],
-            \	'javascript': ['eslint'],
-            \	'cpp':[],
-            \	'c': [],
-\}
+cmd([[let g:ale_linters = {
+        \	'python': ['flake8', 'pylint'],
+        \	'javascript': ['eslint'],
+        \	'cpp':[],
+        \	'c': [],
+    \}
+]])
 
-let g:ale_fixers = {
-            \   '*': ['trim_whitespace'],
-            \   'cpp': ['clang-format'],
-            \   'c': ['clang-format'],
-\}
+cmd([[let g:ale_fixers = {
+       \   '*': ['trim_whitespace'],
+       \   'cpp': ['clang-format'],
+       \   'c': ['clang-format'],
+    \}
+]])
 
-let g:ale_c_clangformat_options = '"-style={
-            \ BasedOnStyle: google,
-            \ IndentWidth: 2,
-            \ ColumnLimit: 100,
-            \ AllowShortBlocksOnASingleLine: Always,
-            \ AllowShortFunctionsOnASingleLine: Inline,
-            \ FixNamespaceComments: true,
-            \ ReflowComments: false,
-\}"'
+cmd([[let g:ale_c_clangformat_options = '"-style={
+        \ BasedOnStyle: google,
+        \ IndentWidth: 4,
+        \ ColumnLimit: 100,
+        \ AllowShortBlocksOnASingleLine: Always,
+        \ AllowShortFunctionsOnASingleLine: Inline,
+        \ FixNamespaceComments: true,
+        \ ReflowComments: false,
+        \ }"'
 ]])
 
 g['ale_fix_on_save'] = 1
 g['ale_completetion_enable'] = 0
 g['neocomplete#enable_at_startup'] = 1
-g['loaded_node_provider'] = 0
-g['loaded_perl_provider'] = 0
 
 ------------------------------------------------------------------------ Themes
 g['airline#extensions#tabline#formatter'] = 'unique_tail'
@@ -157,16 +154,16 @@ cmd([[
     endi
 ]])
 
-cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent1 guifg=#FF6188 gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent2 guifg=#ffb86c gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent3 guifg=#50fa7b gui=nocombine]]
 cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
 cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent6 guifg=#ff79c6 gui=nocombine]]
 
 cmd([[
     hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=NONE guifg=#FFFFFF
-  let g:indentLine_fileTypeExclude = ['dashboard']
+    let g:indentLine_fileTypeExclude = ['dashboard']
 ]])
 
 require("indent_blankline").setup {
