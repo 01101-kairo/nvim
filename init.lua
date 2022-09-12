@@ -7,6 +7,7 @@ local cmd = vim.cmd
 local command = api.nvim_command
 local keymap = vim.api.nvim_set_keymap
 local ns = {noremap=true, silent=true}
+
 -------------------------------------------------------------- set nocompatible
 command("syntax on")
 command("filetype on")
@@ -61,14 +62,13 @@ opt.autoindent=true			-- aoutoindent
 opt.smartindent=true		-- ativa autoindent da linguagens que eu tiver trabalhondo
 opt.wildmenu=true			-- menuzinho de completar comandos vim
 opt.confirm=true			-- confirma exit
-
 ----------------------------------------------------------------------- Run COD
 cmd([[function! Run(arq)
         :w
         if &filetype == 'html'
             :Bracey
         elseif &filetype == 'Java'
-            :!javac '%' && java '%'
+            :!javac '%' -d /tmp/ && java /tmp/'%'
         elseif &filetype == 'markdown'
             :exec '!glow' a:arq
         elseif &filetype == 'python'
@@ -82,7 +82,7 @@ cmd([[function! Run(arq)
 keymap("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
 keymap("n","<F7>",":set foldmethod=indent<CR>",ns)
 keymap("n","<C-s>",":w<CR>",ns)
-keymap("n","<C-h>",":NERDTreeToggle<CR>",ns)
+keymap("n","<C-h>",":CocCommand explorer<CR>",ns)
 keymap("n","<C-q>",":bp |bd #<CR>",ns)
 keymap("n","<M-l>",":bn<CR>",ns)
 keymap("n","<M-h>",":bp<CR>",ns)
@@ -90,15 +90,15 @@ keymap("n","<space>"," za",ns)
 keymap("n","<C-j>","<C-w>j",ns)
 keymap("n","<C-k>","<C-w>k",ns)
 keymap("n","<C-l>","<C-w>l",ns)
-
---------------------------------------------------------------------- ULtiSnips
-g['ULtiSnipsEditSplit'] = 'vertical'
-g['ULtiSnipsJumpForwardTrigger'] = '<TAB>'
-g['ULtiSnipsJumpBackwardTrigger'] = '<s-TAB>'
-
+--------------------------------------------------------------------------- Coc
+cmd([[
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+]])
 -------------------------------------------------------------------------- ale
 cmd([[
-let g:ale_linters = {
+    let g:ale_linters = {
             \	'python': ['flake8', 'pylint'],
             \	'javascript': ['eslint'],
             \	'cpp':[],
@@ -127,23 +127,7 @@ g['ale_completetion_enable'] = 0
 g['neocomplete#enable_at_startup'] = 1
 g['loaded_node_provider'] = 0
 g['loaded_perl_provider'] = 0
--------------------------------------------------- Rainbow Parentheses Improved
-g['rainbow_active'] = 1
-cmd([[
-let g:rainbow_conf = {'separately': {'html': 0, }}
-]])
---------------------------------------------------------------------------- Coc
-cmd([[inoremap <silent><expr> <TAB>
-          \ coc#pum#visible() ? coc#_select_confirm() :
-          \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-          \ CheckBackSpace() ? "\<TAB>" :
-          \ coc#refresh()
 
-    function! CheckBackSpace() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
-]])
 ------------------------------------------------------------------------ Themes
 g['airline#extensions#tabline#formatter'] = 'unique_tail'
 g['airline#extensions#tabline#enabled'] = 1
@@ -151,7 +135,7 @@ g['airline#extensions#tabline#left_sep'] = ' '
 g['airline#extensions#tabline#left_alt_sep'] = '|'
 
 cmd([[
-if exists('+termguicolors')
+    if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
@@ -181,7 +165,7 @@ cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
 cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
 cmd([[
-  hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=NONE guifg=#FFFFFF
+    hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=NONE guifg=#FFFFFF
   let g:indentLine_fileTypeExclude = ['dashboard']
 ]])
 
