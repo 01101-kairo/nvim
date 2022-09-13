@@ -16,7 +16,6 @@ command("filetype indent on")
 command("filetype plugin indent on")
 command("set diffopt& diffopt+=algorithm:histogram,indent-heuristic")
 command("set signcolumn=yes")
-command("set rtp+=~/.fzf")	-- vc sabe oq é isso?
 command("set is hls ic scs")-- opções de busca
 command("set nocompatible")	-- be improved, required
 command("set nowrap")		-- linha longa
@@ -62,6 +61,7 @@ opt.autoindent=true			-- aoutoindent
 opt.smartindent=true		-- ativa autoindent da linguagens que eu tiver trabalhondo
 opt.wildmenu=true			-- menuzinho de completar comandos vim
 opt.confirm=true			-- confirma exit
+
 ----------------------------------------------------------------------- Run COD
 cmd([[function! Run(arq)
         :w
@@ -78,22 +78,25 @@ cmd([[function! Run(arq)
         endif
     endfunctio
 ]])
+
 ----------------------------------------------------------------------- Key Map
 keymap("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
-keymap("n","<F7>",":set foldmethod=indent<CR>",ns)
+keymap("n","<F7>",":set foldmethod=indent<CR>",ns) -- za desdobrar um por um, space tudo de uma vez
 keymap("n","<C-s>",":w<CR>",ns)
 keymap("n","<C-h>",":CocCommand explorer<CR>",ns)
 keymap("n","<C-q>",":bp |bd #<CR>",ns)
 keymap("n","<M-l>",":bn<CR>",ns)
 keymap("n","<M-h>",":bp<CR>",ns)
-keymap("n","<space>"," za",ns)
 keymap("n","<C-j>","<C-w>j",ns)
 keymap("n","<C-k>","<C-w>k",ns)
 keymap("n","<C-l>","<C-w>l",ns)
+
 --------------------------------------------------------------------------- Coc
 cmd([[inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]])
 cmd([[inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"]])
 cmd([[inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]])
+cmd([[inoremap <expr> <Right> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]])
+
 -------------------------------------------------------------------------- ale
 cmd([[let g:ale_linters = {
         \	'python': ['flake8', 'pylint'],
