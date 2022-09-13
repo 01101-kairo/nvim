@@ -95,7 +95,6 @@ keymap("n","<C-l>","<C-w>l",ns)
 cmd([[inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]])
 cmd([[inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"]])
 cmd([[inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]])
--- cmd([[inoremap <expr> <Right> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]])
 
 -------------------------------------------------------------------------- ale
 cmd([[let g:ale_linters = {
