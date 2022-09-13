@@ -95,7 +95,7 @@ keymap("n","<C-l>","<C-w>l",ns)
 cmd([[inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]])
 cmd([[inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"]])
 cmd([[inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]])
-cmd([[inoremap <expr> <Right> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]])
+-- cmd([[inoremap <expr> <Right> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]])
 
 -------------------------------------------------------------------------- ale
 cmd([[let g:ale_linters = {
@@ -127,6 +127,7 @@ cmd([[let g:ale_c_clangformat_options = '"-style={
 g['ale_fix_on_save'] = 1
 g['ale_completetion_enable'] = 0
 g['neocomplete#enable_at_startup'] = 1
+g['rainbow_active']= 1
 
 ------------------------------------------------------------------------ Themes
 g['airline#extensions#tabline#formatter'] = 'unique_tail'
