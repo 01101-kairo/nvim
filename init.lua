@@ -8,24 +8,6 @@ local command = api.nvim_command
 local keymap = vim.api.nvim_set_keymap
 local ns = {noremap=true, silent=true}
 
------------------------------------------------------------------------ Run COD
-cmd([[
-    function! Run(arq)
-        :w
-        if &filetype == 'html'
-            :Bracey
-        elseif &filetype == 'Java'
-            :!javac '%' -d /tmp/ && java /tmp/'%'
-        elseif &filetype == 'markdown'
-            :exec '!glow' a:arq
-        elseif &filetype == 'python'
-            :exec '!python3' a:arq
-        elseif &filetype == 'c'
-            :exec '!clang -o /tmp/a.out' a:arq ';/tmp/a.out'
-        endif
-    endfunctio
-]])
-
 -------------------------------------------------------------- set nocompatible
 command("syntax on")
 command("filetype on")
@@ -187,4 +169,22 @@ require("indent_blankline").setup {
 }
 -- PARA O COLORIZER
 require'colorizer'.setup()
+----------------------------------------------------------------------- Run COD
+cmd([[
+    function! Run(arq)
+        :w
+        if &filetype == 'html'
+            :Bracey
+        elseif &filetype == 'Java'
+            :!javac '%' -d /tmp/ && java /tmp/'%'
+        elseif &filetype == 'markdown'
+            :exec '!glow' a:arq
+        elseif &filetype == 'python'
+            :exec '!python3' a:arq
+        elseif &filetype == 'c'
+            :exec '!clang -o /tmp/a.out' a:arq ';/tmp/a.out'
+        endif
+    endfunctio
+]])
+
 -------------------------------------------------------------------------------
