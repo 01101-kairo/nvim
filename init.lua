@@ -8,6 +8,24 @@ local command = api.nvim_command
 local keymap = vim.api.nvim_set_keymap
 local ns = {noremap=true, silent=true}
 
+----------------------------------------------------------------------- Run COD
+cmd([[
+    function! Run(arq)
+        :w
+        if &filetype == 'html'
+            :Bracey
+        elseif &filetype == 'Java'
+            :!javac '%' -d /tmp/ && java /tmp/'%'
+        elseif &filetype == 'markdown'
+            :exec '!glow' a:arq
+        elseif &filetype == 'python'
+            :exec '!python3' a:arq
+        elseif &filetype == 'c'
+            :exec '!clang -o /tmp/a.out' a:arq ';/tmp/a.out'
+        endif
+    endfunctio
+]])
+
 -------------------------------------------------------------- set nocompatible
 command("syntax on")
 command("filetype on")
@@ -62,23 +80,6 @@ opt.smartindent=true		-- ativa autoindent da linguagens que eu tiver trabalhondo
 opt.wildmenu=true			-- menuzinho de completar comandos vim
 opt.confirm=true			-- confirma exit
 
------------------------------------------------------------------------ Run COD
-cmd([[function! Run(arq)
-        :w
-        if &filetype == 'html'
-            :Bracey
-        elseif &filetype == 'Java'
-            :!javac '%' -d /tmp/ && java /tmp/'%'
-        elseif &filetype == 'markdown'
-            :exec '!glow' a:arq
-        elseif &filetype == 'python'
-            :exec '!python3' a:arq
-        elseif &filetype == 'c'
-            :exec '!clang -o /tmp/a.out' a:arq ';/tmp/a.out'
-        endif
-    endfunctio
-]])
-
 ----------------------------------------------------------------------- Key Map
 keymap("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
 keymap("n","<F7>",":set foldmethod=indent<CR>",ns) -- za desdobrar um por um, space tudo de uma vez
@@ -97,22 +98,25 @@ cmd([[inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"]]
 cmd([[inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]])
 
 -------------------------------------------------------------------------- ale
-cmd([[let g:ale_linters = {
-        \	'python': ['flake8', 'pylint'],
-        \	'javascript': ['eslint'],
-        \	'cpp':[],
-        \	'c': [],
+cmd([[
+    let g:ale_linters = {
+        \'python': ['flake8', 'pylint'],
+        \'javascript': ['eslint'],
+        \'cpp':[],
+        \'c': [],
     \}
 ]])
 
-cmd([[let g:ale_fixers = {
-       \   '*': ['trim_whitespace'],
-       \   'cpp': ['clang-format'],
-       \   'c': ['clang-format'],
+cmd([[
+    let g:ale_fixers = {
+       \'*': ['trim_whitespace'],
+       \'cpp': ['clang-format'],
+       \'c': ['clang-format'],
     \}
 ]])
 
-cmd([[let g:ale_c_clangformat_options = '"-style={
+cmd([[
+    let g:ale_c_clangformat_options = '"-style={
         \ BasedOnStyle: google,
         \ IndentWidth: 4,
         \ ColumnLimit: 100,
@@ -120,7 +124,7 @@ cmd([[let g:ale_c_clangformat_options = '"-style={
         \ AllowShortFunctionsOnASingleLine: Inline,
         \ FixNamespaceComments: true,
         \ ReflowComments: false,
-        \ }"'
+    \ }"'
 ]])
 
 g['ale_fix_on_save'] = 1
@@ -136,9 +140,9 @@ g['airline#extensions#tabline#left_alt_sep'] = '|'
 
 cmd([[
     if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    endif
 ]])
 
 g['sonokai_style'] = 'andromeda'
