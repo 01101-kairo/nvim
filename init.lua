@@ -44,7 +44,6 @@ opt.cmdheight=2
 opt.termguicolors=true
 opt.list = true
 opt.listchars:append "eol:↴"
--- opt.listchars:append "space:⋅"
 opt.hidden=true
 opt.expandtab=true
 opt.number=true				-- só pra eu saber qual linha eu to
@@ -115,11 +114,7 @@ g['neocomplete#enable_at_startup'] = 1
 g['rainbow_active']= 1
 
 ------------------------------------------------------------------------ Themes
-g['airline#extensions#tabline#formatter'] = 'unique_tail'
-g['airline#extensions#tabline#enabled'] = 1
-g['airline#extensions#tabline#left_sep'] = ' '
-g['airline#extensions#tabline#left_alt_sep'] = '|'
-
+-- termguicolors
 cmd([[
     if exists('+termguicolors')
         let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -127,22 +122,29 @@ cmd([[
     endif
 ]])
 
-g['sonokai_style'] = 'andromeda'
-g['sonokai_enable_italic'] = 1
-g['sonokai_disable_italic_comment'] = 0
-g['sonokai_diagnostic_line_highlight'] = 1
-g['sonokai_current_word'] = 'bold'
+-- theme onedark
+require('onedark').setup  {
+    -- Main options --
+    style = 'deep', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+    transparent = true,  -- Show/hide background
+    term_colors = true, -- Change terminal color as per the selected theme style
+    ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+    cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
 
-cmd([[
-    packadd! sonokai
-    "colorscheme sonokai
-    colorscheme molokai
-    if (has("nvim")) "Transparent background. Only for nvim
-        highlight Normal guibg=NONE ctermbg=NONE
-        highlight EndOfBuffer guibg=NONE ctermbg=NONE
-    endi
-]])
+    -- Change code style ---
+    -- Options are italic, bold, underline, none
+    -- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
+    code_style = {
+        comments = 'italic',
+        keywords = 'none',
+        functions = 'none',
+        strings = 'none',
+        variables = 'none'
+    },
 
+}
+require('onedark').load()
+--------------------------------------------------------------------- highlight
 cmd [[highlight IndentBlanklineIndent1 guifg=#FF6188 gui=nocombine]]
 cmd [[highlight IndentBlanklineIndent2 guifg=#ffb86c gui=nocombine]]
 cmd [[highlight IndentBlanklineIndent3 guifg=#50fa7b gui=nocombine]]
@@ -167,8 +169,19 @@ require("indent_blankline").setup {
         "IndentBlanklineIndent6",
     },
 }
--- PARA O COLORIZER
+
+-------------------------------------------------------------- PARA O COLORIZER
 require'colorizer'.setup()
+----------------------------------------------------------------------- lualine
+require('lualine').setup()
+-------------------------------------------------------------------- bufferline
+require'bufferline'.setup{}
+diagnostics_indicator = function(count, level, diagnostics_dict, context)
+  if context.buffer:current() then
+    return ''
+  end
+  return ''
+end
 ----------------------------------------------------------------------- Run COD
 cmd([[
     function! Run(arq)
