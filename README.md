@@ -24,10 +24,6 @@
 * [vim-emmet](#vim-emmet)
 * [coc-explorer](#coc-explorer)
 
-<p style="display: inline_block">
-<img alt="Vim" src="Vim.png" height="150" width="200" alt="logo do vim">
-</p>
-<hr>
 
 # Abrir_o_Vim
 ```
@@ -375,3 +371,7 @@ J junta duas linhas
 ">>": "git Unstage"
 
 ```
+
+<p style="display: inline_block">
+<img alt="Vim" src="Vim.png" height="150" width="200" alt="logo do vim">
+</p>
