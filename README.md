@@ -1,5 +1,5 @@
 <p style="display: inline_block">
-  <img alt="Vim" src="Vim.png" height="150" width="200" alt="logo do vim">
+<img alt="Vim" src="Vim.png" height="150" width="200" alt="logo do vim">
 </p>
 <hr>
 
@@ -22,6 +22,7 @@
 * [Recorta](#Recorta)
 * [Junta](#junta)
 * [vim-emmet](#vim-emmet)
+* [coc-explorer](#coc-explorer)
 
 # Abrir_o_Vim
 ```
@@ -126,9 +127,9 @@ A vai para frente da linha
 ```
 ## visual
 ```
- v seleção de texto
- V seleção de linha
- ^v seleção em bloco
+v seleção de texto
+V seleção de linha
+^v seleção em bloco
 ```
 ## busca
 ```
@@ -185,110 +186,187 @@ J junta duas linhas
 **`div#header`**
 
 ```html
-    <div id="header"></div>
+<div id="header"></div>
 ```
 
 **`div.align-left#header`**
 
 ```html
-    <div id="header" class="align-left"></div>
+<div id="header" class="align-left"></div>
 ```
 
 **`div#header + div#footer`**
 
 ```html
-    <div id="header"></div>
-    <div id="footer"></div>
+<div id="header"></div>
+<div id="footer"></div>
 ```
 
 **`#menu > ul`**
 
 ```html
-    <div id="menu">
-        <ul></ul>
-    </div>
+<div id="menu">
+<ul></ul>
+</div>
 ```
 
 **`#menu > h3 + ul`**
 
 ```html
-    <div id="menu">
-        <h3></h3>
-        <ul></ul>
-    </div>
+<div id="menu">
+<h3></h3>
+<ul></ul>
+</div>
 ```
 
 **`#header > h1{Welcome to our site}`**
 
 ```html
-    <div id="header">
-        <h1>Welcome to our site</h1>
-    </div>
+<div id="header">
+<h1>Welcome to our site</h1>
+</div>
 ```
 
 **`a[href=index.html]{Home}`**
 
 ```html
-    <a href="index.html">Home</a>
+<a href="index.html">Home</a>
 ```
 
 **`ul > li*3`**
 
 ```html
-    <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
 ```
 
 **`ul > li.item-$*3`**
 
 ```html
-    <ul>
-        <li class="item-1"></li>
-        <li class="item-2"></li>
-        <li class="item-3"></li>
-    </ul>
+<ul>
+<li class="item-1"></li>
+<li class="item-2"></li>
+<li class="item-3"></li>
+</ul>
 ```
 
 **`ul > li.item-$*3 > strong`**
 
 ```html
-    <ul>
-        <li class="item-1"><strong></strong></li>
-        <li class="item-2"><strong></strong></li>
-        <li class="item-3"><strong></strong></li>
-    </ul>
+<ul>
+<li class="item-1"><strong></strong></li>
+<li class="item-2"><strong></strong></li>
+<li class="item-3"><strong></strong></li>
+</ul>
 ```
 
 **`table > tr*2 > td.name + td*3`**
 
 ```html
-    <table>
-        <tr>
-            <td class="name"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td class="name"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+<table>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
 ```
 
 **`#header > ul > li < p{Footer}`**
 
 ```html
-    <!-- The < symbol goes back up the parent; i.e., the opposite of >. -->
-    <div id="header">
-        <ul>
-            <li></li>
-        </ul>
-        <p>Footer</p>
-    </div>
+<!-- The < symbol goes back up the parent; i.e., the opposite of >. -->
+<div id="header">
+<ul>
+<li></li>
+</ul>
+<p>Footer</p>
+</div>
+```
+
+## coc-explorer
+
+```
+
+"<tab>": "Menu de ação",
+"gk": ["esperar", "anterior expansível"],
+"gj": ["esperar", "expansível Próximo"],
+"h": ["esperar", "recolher"],
+"l": ["esperar", "expansível?", "expandir", "abrir"],
+"J": ["esperar", "alternar Seleção", "normal:j"],
+"K": ["esperar", "alternar Seleção", "normal:k"],
+"gl": ["esperar", "expandir:recursivo"],
+"gh": ["esperar", "recolher:recursivo"],
+
+"o": ["esperar", "expandido?", "recolher", "expandir"],
+"<cr>": ["esperar", "expansível?", "cd", "abrir"],
+"e": "abrir",
+"s": "abrir:dividir",
+"E": "abrir:vsplit",
+"t": "abrir: aba",
+"<bs>": ["esperar", "ir para pai"],
+"gs": ["esperar", "reveal:selecionar"],
+"il": "preview:rotulagem",
+"ic": "visualização:conteúdo",
+"Il": "preview Ao passar o mouse:toggle:labeling",
+"Ic": "preview Ao passar o mouse:toggle:content",
+"II": "visualização ao passar o mouse: desabilitar",
+
+"yp": "copiar caminho de arquivo",
+"yn": "copiar nome do arquivo",
+"yy": "copiar arquivo",
+"dd": "cortar arquivo",
+"p": "colar arquivo",
+"df": "excluir",
+"dF": "excluir para sempre",
+
+"a": "adicionar arquivo",
+"A": "adicionar diretório",
+"r": "renomear",
+
+"zh": "alternar Oculto",
+"g<ponto>": "alternar Oculto",
+"R": "atualizar",
+
+"?": "ajuda",
+"q": "sair",
+"<esc>": "esc",
+"X": "execução do sistema",
+"gd": "lista tDrive",
+
+"f": "pesquisar",
+"F": "pesquisa recursiva",
+
+"gf": "ir para Fonte:arquivo",
+"gb": "ir para Fonte:buffer",
+
+"[[": ["esperar", "fonte anterior"],
+"]]": ["esperar", "fonte Próxima"],
+
+"[i": ["esperar", "recuar anterior"],
+"]i": ["esperar", "recuar próximo"],
+
+"[m": ["esperar", "marcar Prev:modificado"],
+"]m": ["esperar", "marcar Próximo:modificado"],
+
+"[d": ["wait", "mark Prev:diagnostic Error:diagnostic Warning"],
+"]d": ["wait", "mark Next:diagnostic Error:diagnostic Warning"],
+"[D": ["esperar", "marcar Prev:erro de diagnóstico"],
+"]D": ["wait", "mark Next:diagnostic Error"],
+
+"[c": ["esperar", "marcar Prev:git"],
+"]c": ["wait", "mark Next:git"],
+"<<": "git Stage",
+">>": "git Unstage"
+
 ```

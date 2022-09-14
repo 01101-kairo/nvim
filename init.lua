@@ -1,4 +1,4 @@
-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 local g = vim.g
 local o = vim.o
 local api = vim.api
@@ -135,8 +135,8 @@ g['sonokai_current_word'] = 'bold'
 
 cmd([[
     packadd! sonokai
-    colorscheme sonokai
-
+    "colorscheme sonokai
+    colorscheme molokai
     if (has("nvim")) "Transparent background. Only for nvim
         highlight Normal guibg=NONE ctermbg=NONE
         highlight EndOfBuffer guibg=NONE ctermbg=NONE
