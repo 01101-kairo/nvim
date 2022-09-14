@@ -1,5 +1,5 @@
 <p style="display: inline_block">
-<img alt="Vim" src="sc.png" height="384" width="683" alt="logo do vim">
+<img alt="Vim" src="sc.png" height="584" width="1083" alt="logo do vim">
 </p>
 <hr>
 
@@ -375,5 +375,5 @@ J junta duas linhas
 ```
 
 <p style="display: inline_block">
-<img alt="Vim" src="Vim.png" height="150" width="200" alt="logo do vim">
+<img alt="Vim" src="Vim.png" height="75" width="100" alt="logo do vim">
 </p>
