@@ -1,6 +1,5 @@
 <p style="display: inline_block">
-<img alt="Vim" src="Vim.png" height="150" width="200" alt="logo do vim">
-<img alt="Vim" src="Vim.png" height="1366" width="768" alt="logo do vim">
+<img alt="Vim" src="sc.png" height="384" width="683" alt="logo do vim">
 </p>
 <hr>
 
@@ -25,6 +24,10 @@
 * [vim-emmet](#vim-emmet)
 * [coc-explorer](#coc-explorer)
 
+<p style="display: inline_block">
+<img alt="Vim" src="Vim.png" height="150" width="200" alt="logo do vim">
+</p>
+<hr>
 # Abrir_o_Vim
 ```
 vim arquivo		abre o arquivo ou cria
