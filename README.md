@@ -3,6 +3,7 @@
 </p>
 <hr>
 
+# indice
 
 * [Abrir O vim](#Abrir_o_Vim)
 * [exit](#exit)
@@ -24,6 +25,7 @@
 * [vim-emmet](#vim-emmet)
 * [coc-explorer](#coc-explorer)
 
+<hr>
 
 # Abrir_o_Vim
 ```
