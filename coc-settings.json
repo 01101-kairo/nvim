@@ -44,18 +44,18 @@
         // "unit": "\uf475",
         "folder": " ﱮ ",
         // "folder": "\uf114",
-        "text": "m  ",
+        "text": "  ",
         // "text": "\ue612",
         "enumMember": "  ",
         // "enumMember": "\uf02b",
-        "constant": "y  ",
+        "constant": "  ",
         // "constant": "\uf8fe",
-        "operator": "j  ",
+        "operator": "  ",
         // "operator": "\u03a8",
-        "module": "k  ",
+        "module": "  ",
         // "module": "\uf40d",
         // "value": "\uf89f",
-        "value": "q  "
+        "value": "  "
     },
     "diagnostic.displayByAle": true,
     // coc-explorer
