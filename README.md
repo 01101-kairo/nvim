@@ -1,5 +1,6 @@
 <p style="display: inline_block">
 <img alt="Vim" src="Vim.png" height="150" width="200" alt="logo do vim">
+<img alt="Vim" src="Vim.png" height="1366" width="768" alt="logo do vim">
 </p>
 <hr>
 
