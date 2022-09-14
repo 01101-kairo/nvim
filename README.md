@@ -3,7 +3,7 @@
 </p>
 <hr>
 
-# indice
+# índice
 
 * [Abrir O vim](#Abrir_o_Vim)
 * [exit](#exit)
