@@ -64,46 +64,33 @@ opt.confirm=true			-- confirma exit
 ---------------------------------------------------------------------- plugin's
 cmd[[packadd packer.nvim]]
 require('packer').startup(function(use)
-    -- using packer.nvim
-    -- Packer can manage itself
     use 'wbthomason/packer.nvim'
-    --  coc.nvim
-    use {'neoclide/coc.nvim', branch = 'release'}
-    --  onedark.nvim Using Packer
+
     use 'navarasu/onedark.nvim'
-    --  vim-commentary
+    use "lukas-reineke/indent-blankline.nvim"
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
+    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+    use {'kyazdani42/nvim-web-devicons'}
+    use {'norcalli/nvim-colorizer.lua'}
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
+    use {'mg979/vim-visual-multi', branch = 'master'}
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
     use {
         'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup()
         end
     }
-    --  vim-snippets
-    use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
-    --  auto-pairs
-    use {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
-    }
-    --  indent-blankline .nvim
-    use "lukas-reineke/indent-blankline.nvim"
-    --  nvim-colorizer.lua
-    use 'norcalli/nvim-colorizer.lua'
-    -- vim-fugitive
     use 'tpope/vim-fugitive'
-    --  vim-visual-multi
-    use {'mg979/vim-visual-multi', branch = 'master'}
-    --  lualine.nvim
-    use {
-        'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
-    --  nvim-treesitter Post-install/update hook with neovim command
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    --  bufferline.nvim
-    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
-    --  nvim-web-devicons
-    use {'kyazdani42/nvim-web-devicons'}
+    use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
+    use {'neoclide/coc.nvim', branch = 'release'}
 end)
 ----------------------------------------------------------------------- Key Map
 keymap("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
