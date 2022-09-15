@@ -5,29 +5,31 @@
 
 # índice
 
-* [Abrir O vim](#Abrir_o_Vim)
-* [exit](#exit)
-* [Movese](#Movese)
-* [Atalhos](#Atalhos)
-* [RegeExr vim](#RegeExr)
-* [comando](#comandos)
-* [set](#set)
-* [Modos de editor](#Modos_do_editor)
-* [inserção](#Inserção)
-* [visual](#visual)
-* [busca](#busca)
-* [reposição](#reposição)
-* [ESC manipulação de texto](#ESC_manipulação_de_texto)
-* [Copia](#Copia)
-* [Cola](#Cola)
-* [Recorta](#Recorta)
-* [Junta](#junta)
-* [vim-emmet](#vim-emmet)
-* [coc-explorer](#coc-explorer)
+- [Abrir O vim](#Abrir_o_Vim)
+- [exit](#exit)
+- [Movese](#Movese)
+- [Atalhos](#Atalhos)
+- [RegeExr vim](#RegeExr)
+- [comando](#comandos)
+- [set](#set)
+- [Modos de editor](#Modos_do_editor)
+- [inserção](#Inserção)
+- [visual](#visual)
+- [busca](#busca)
+- [reposição](#reposição)
+- [ESC manipulação de texto](#ESC_manipulação_de_texto)
+- [Copia](#Copia)
+- [Cola](#Cola)
+- [Recorta](#Recorta)
+- [Junta](#junta)
+- [vim-emmet](#vim-emmet)
+- [coc-explorer](#coc-explorer)
+- [muti-cursor](#muti-curso)
 
 <hr>
 
 # Abrir_o_Vim
+
 ```
 vim arquivo		abre o arquivo ou cria
 vim arquivo +		abre com ocurso no final do arquivo
@@ -38,7 +40,9 @@ vim arquivo outro -O	abre colunas Verticais
 vim -c ":%s/palavra/outra/g" arquivo
 troca todas as palavras por outra sem o argumento g troca apenas a primeira ocorencia da palavra
 ```
+
 # exit
+
 ```
 :w salva
 :q sai
@@ -48,7 +52,9 @@ troca todas as palavras por outra sem o argumento g troca apenas a primeira ocor
 :wa salva todos os arquivos abertos
 :wqa sai e salva todos os arquivos abertos
 ```
+
 # Movese
+
 ```
 h j k l servem como cetas de direção
 $ vai para o fim da linha
@@ -63,7 +69,9 @@ ggVG seleciona tudo, se aperta ==  indenta tudo
 [ pula para frase anterior ] o inverso
 { pula pro paragrafo anterior } o inverso
 ```
+
 # Atalhos
+
 ```
 ^n completar palavra
 ^p completa palavra
@@ -87,13 +95,17 @@ ggVG seleciona tudo, se aperta ==  indenta tudo
 ^wc fecha a janela atual
 ^w h j k l mover para janela
 ```
+
 ## RegeExr
+
 ```
 $ vai pro fim da linha
 ^ vai pro inicio da linha
 :<comando>! forca comando
 ```
+
 # comandos
+
 ```
 :split [arquivo/caminho] abre um arquivo em nova janela horizontais
 :split	:sp divide horizontais
@@ -109,15 +121,20 @@ $ vai pro fim da linha
 :$ ou G vai para o final do arquivo
 :1,$ s/substui/palavras
 ```
+
 ## set
+
 ```
 :set autoindent ele autoindenta na sessao atual.
 :set hlsearch detaca todos os termos encontrados (highlight).
 :set nohtsearch desativa o hlsearch.
 :set aw salva a cada alteração.
 ```
+
 # Modos_do_editor
+
 ## inserção
+
 ```
 Nºi o'que for escrito, repete o'que foi escrita depois de precionar ESC
 i inserção de texto
@@ -128,23 +145,32 @@ O cria uma linha embraco em cima
 a vai para frente do o curso
 A vai para frente da linha
 ```
+
 ## visual
+
 ```
 v seleção de texto
 V seleção de linha
 ^v seleção em bloco
 ```
+
 ## busca
+
 ```
 / busca de padróes no texto
 n localisa a próxima N anterior  * sobo
 ```
+
 ## reposição
+
 ```
 R inserção sobreescrevendo
 ```
+
 ## ESC_manipulação_de_texto
+
 ### Copia
+
 ```
 y copia oque esta sobre o curso
 yy copia toda a linha
@@ -153,13 +179,17 @@ y$ copia da posicao atual ate o fim da linha
 y2j copia mais duas linhas pra baicho
 "+y copia para a área de transferencia
 ```
+
 ### Cola
+
 ```
 p cola
 [p cola antes do curso ]P faz o inverso
 "+gp cola da area detranferencia
 ```
+
 ### Recorta
+
 ```
 x recorta sob o cursor X antes do cursor
 dd recorta toda a linha
@@ -174,10 +204,13 @@ dw recorta ate o fim da palavra
 d+ recorta da reposição atual
 5db apaga 5 palavras para trás da reposição do cursor
 ```
+
 ### Junta
+
 ```
 J junta duas linhas
 ```
+
 ## vim-emmet
 
 **`div`**
@@ -189,60 +222,83 @@ J junta duas linhas
 **`div#header`**
 
 ```html
-<div id="header"></div>
+<div
+  id="header"
+></div>
 ```
 
 **`div.align-left#header`**
 
 ```html
-<div id="header" class="align-left"></div>
+<div
+  id="header"
+  class="align-left"
+></div>
 ```
 
 **`div#header + div#footer`**
 
 ```html
-<div id="header"></div>
-<div id="footer"></div>
+<div
+  id="header"
+></div>
+<div
+  id="footer"
+></div>
 ```
 
 **`#menu > ul`**
 
 ```html
-<div id="menu">
-<ul></ul>
+<div
+  id="menu"
+>
+  <ul></ul>
 </div>
 ```
 
 **`#menu > h3 + ul`**
 
 ```html
-<div id="menu">
-<h3></h3>
-<ul></ul>
+<div
+  id="menu"
+>
+  <h3></h3>
+  <ul></ul>
 </div>
 ```
 
 **`#header > h1{Welcome to our site}`**
 
 ```html
-<div id="header">
-<h1>Welcome to our site</h1>
+<div
+  id="header"
+>
+  <h1>
+    Welcome
+    to
+    our
+    site
+  </h1>
 </div>
 ```
 
 **`a[href=index.html]{Home}`**
 
 ```html
-<a href="index.html">Home</a>
+<a
+  href="index.html"
+  >Home</a
+>
 ```
 
 **`ul > li*3`**
 
 ```html
 <ul>
-<li></li>
-<li></li>
-<li></li>
+  <li></li>
+  <li></li>
+  <li></li>
 </ul>
 ```
 
@@ -250,9 +306,15 @@ J junta duas linhas
 
 ```html
 <ul>
-<li class="item-1"></li>
-<li class="item-2"></li>
-<li class="item-3"></li>
+  <li
+    class="item-1"
+  ></li>
+  <li
+    class="item-2"
+  ></li>
+  <li
+    class="item-3"
+  ></li>
 </ul>
 ```
 
@@ -260,9 +322,21 @@ J junta duas linhas
 
 ```html
 <ul>
-<li class="item-1"><strong></strong></li>
-<li class="item-2"><strong></strong></li>
-<li class="item-3"><strong></strong></li>
+  <li
+    class="item-1"
+  >
+    <strong></strong>
+  </li>
+  <li
+    class="item-2"
+  >
+    <strong></strong>
+  </li>
+  <li
+    class="item-3"
+  >
+    <strong></strong>
+  </li>
 </ul>
 ```
 
@@ -270,18 +344,22 @@ J junta duas linhas
 
 ```html
 <table>
-<tr>
-<td class="name"></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+  <tr>
+    <td
+      class="name"
+    ></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td
+      class="name"
+    ></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
 </table>
 ```
 
@@ -289,11 +367,15 @@ J junta duas linhas
 
 ```html
 <!-- The < symbol goes back up the parent; i.e., the opposite of >. -->
-<div id="header">
-<ul>
-<li></li>
-</ul>
-<p>Footer</p>
+<div
+  id="header"
+>
+  <ul>
+    <li></li>
+  </ul>
+  <p>
+    Footer
+  </p>
 </div>
 ```
 
@@ -388,7 +470,20 @@ Git
 
 ```
 
+# muti-curso
+
+```
+selecione palavras com Ctrl-N (como Ctrl-d em Sublime Text/VS Code)
+crie cursores verticalmente com Ctrl-Down/Ctrl-Up
+selecione um caractere de cada vez com Shift-Setas
+pressione n/N para obter a ocorrência seguinte/anterior
+pressione [/] para selecionar o cursor seguinte/anterior
+pressione q para pular atual e obter a próxima ocorrência
+pressione Q para remover o cursor/seleção atual
+inicie o modo de inserção com i,a,I,A
+Dois modos principais:
+```
+
 <p style="display: inline_block">
     <img alt="Vim" src="Vim.png" height="75" width="100" alt="logo do vim">
 </p>
-

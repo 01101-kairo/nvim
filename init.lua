@@ -104,8 +104,6 @@ require('packer').startup(function(use)
     use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
     --  nvim-web-devicons
     use {'kyazdani42/nvim-web-devicons'}
-    -- bracey.vim
-    -- tagalong.vim
 end)
 ----------------------------------------------------------------------- Key Map
 keymap("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
