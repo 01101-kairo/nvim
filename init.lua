@@ -61,6 +61,52 @@ opt.smartindent=true		-- ativa autoindent da linguagens que eu tiver trabalhondo
 opt.wildmenu=true			-- menuzinho de completar comandos vim
 opt.confirm=true			-- confirma exit
 
+---------------------------------------------------------------------- plugin's
+cmd[[packadd packer.nvim]]
+require('packer').startup(function(use)
+    -- using packer.nvim
+    -- Packer can manage itself
+    use 'wbthomason/packer.nvim'
+    --  coc.nvim
+    use {'neoclide/coc.nvim', branch = 'release'}
+    --  onedark.nvim Using Packer
+    use 'navarasu/onedark.nvim'
+    --  vim-commentary
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+    --  vim-snippets
+    use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
+    --  auto-pairs
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
+    --  indent-blankline .nvim
+    use "lukas-reineke/indent-blankline.nvim"
+    --  nvim-colorizer.lua
+    use 'norcalli/nvim-colorizer.lua'
+    -- vim-fugitive
+    use 'tpope/vim-fugitive'
+    --  vim-visual-multi
+    use {'mg979/vim-visual-multi', branch = 'master'}
+    --  lualine.nvim
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
+    --  nvim-treesitter Post-install/update hook with neovim command
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    --  bufferline.nvim
+    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+    --  nvim-web-devicons
+    use {'kyazdani42/nvim-web-devicons'}
+    -- bracey.vim
+    -- tagalong.vim
+end)
 ----------------------------------------------------------------------- Key Map
 keymap("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
 keymap("n","<F7>",":set foldmethod=indent<CR>",ns) -- za desdobrar um por um, space tudo de uma vez
@@ -171,17 +217,19 @@ require("indent_blankline").setup {
 }
 
 -------------------------------------------------------------- PARA O COLORIZER
-require'colorizer'.setup()
+require('colorizer').setup()
 ----------------------------------------------------------------------- lualine
 require('lualine').setup()
 -------------------------------------------------------------------- bufferline
-require'bufferline'.setup{}
+require("bufferline").setup{}
 diagnostics_indicator = function(count, level, diagnostics_dict, context)
   if context.buffer:current() then
     return ''
   end
   return ''
 end
+-------------------------------------------------------------------- comentario
+require('Comment').setup()
 ----------------------------------------------------------------------- Run COD
 cmd([[
     function! Run(arq)
@@ -200,4 +248,18 @@ cmd([[
     endfunctio
 ]])
 
--------------------------------------------------------------------------------
+------------------------------------------------------------------------- sitax
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "c", "lua", "cpp", "java", "bash", "javascript" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = true,
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    additional_vim_regex_highlighting = false,
+  },
+}

@@ -1,5 +1,5 @@
 <p style="display: inline_block">
-<img alt="Vim" src="sc.png" height="484" width="1083" alt="meu neovim">
+    <img alt="Vim" src="sc.png" height="584" width="1083" alt="logo do vim">
 </p>
 <hr>
 
@@ -300,6 +300,7 @@ J junta duas linhas
 ## coc-explorer
 
 ```
+Abrir diretório
 
 "<tab>": "Menu de ação",
 "gk": ["esperar", "anterior expansível"],
@@ -310,6 +311,8 @@ J junta duas linhas
 "K": ["esperar", "alternar Seleção", "normal:k"],
 "gl": ["esperar", "expandir:recursivo"],
 "gh": ["esperar", "recolher:recursivo"],
+
+Abrira arquivo
 
 "o": ["esperar", "expandido?", "recolher", "expandir"],
 "<cr>": ["esperar", "expansível?", "cd", "abrir"],
@@ -325,6 +328,8 @@ J junta duas linhas
 "Ic": "preview Ao passar o mouse:toggle:content",
 "II": "visualização ao passar o mouse: desabilitar",
 
+Copiar Excluir
+
 "yp": "copiar caminho de arquivo",
 "yn": "copiar nome do arquivo",
 "yy": "copiar arquivo",
@@ -333,19 +338,26 @@ J junta duas linhas
 "df": "excluir",
 "dF": "excluir para sempre",
 
+Renomear e add
+
 "a": "adicionar arquivo",
 "A": "adicionar diretório",
 "r": "renomear",
 
+Visualizar pastas ocutas
+
 "zh": "alternar Oculto",
 "g<ponto>": "alternar Oculto",
 "R": "atualizar",
+
 
 "?": "ajuda",
 "q": "sair",
 "<esc>": "esc",
 "X": "execução do sistema",
 "gd": "lista tDrive",
+
+Pesquisar
 
 "f": "pesquisar",
 "F": "pesquisa recursiva",
@@ -367,6 +379,8 @@ J junta duas linhas
 "[D": ["esperar", "marcar Prev:erro de diagnóstico"],
 "]D": ["wait", "mark Next:diagnostic Error"],
 
+Git
+
 "[c": ["esperar", "marcar Prev:git"],
 "]c": ["wait", "mark Next:git"],
 "<<": "git Stage",
@@ -375,5 +389,6 @@ J junta duas linhas
 ```
 
 <p style="display: inline_block">
-<img alt="Vim" src="Vim.png" height="75" width="100" alt="logo do vim">
+    <img alt="Vim" src="Vim.png" height="75" width="100" alt="logo do vim">
 </p>
+
