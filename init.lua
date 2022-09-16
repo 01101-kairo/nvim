@@ -67,20 +67,20 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     use 'navarasu/onedark.nvim'
-    use "lukas-reineke/indent-blankline.nvim"
+    use 'lukas-reineke/indent-blankline.nvim'
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
-    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
-    use {'kyazdani42/nvim-web-devicons'}
-    use {'norcalli/nvim-colorizer.lua'}
+    use {'akinsho/bufferline.nvim', tag = 'v2.*', requires = 'kyazdani42/nvim-web-devicons'}
+    use 'kyazdani42/nvim-web-devicons'
+    use 'norcalli/nvim-colorizer.lua'
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
     use {'mg979/vim-visual-multi', branch = 'master'}
     use {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
+        'windwp/nvim-autopairs',
+        config = function() require('nvim-autopairs').setup {} end
     }
     use {
         'numToStr/Comment.nvim',
@@ -88,9 +88,23 @@ require('packer').startup(function(use)
             require('Comment').setup()
         end
     }
-    use 'tpope/vim-fugitive'
-    use({"L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*"})
+    -- use {'pope/vim-fugitive'}
+    use {'L3MON4D3/LuaSnip', tag = 'v<CurrentMajor>.*'}
     use {'neoclide/coc.nvim', branch = 'release'}
+
+    -- install without yarn or npm
+    use{
+        'iamcco/markdown-preview.nvim',
+        run = function() vim.fn['mkdp#util#install']() end,
+    }
+    use{
+        'turbio/bracey.vim',
+        -- fazer o run manualmente na pasta
+        -- $HOME/.local/share/nvim/site/pack/packer/start/bracey.vim/
+        run = 'npm install --prefix server',
+    }
+    use 'dense-analysis/ale'
+    use{ 'iamcco/markdown-preview.nvim', run = 'cd app && npm install', setup = function() vim.g.mkdp_filetypes = { 'markdown' } end, ft = { 'markdown' }, }
 end)
 ----------------------------------------------------------------------- Key Map
 keymap("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
@@ -224,7 +238,7 @@ cmd([[
         elseif &filetype == 'Java'
             :!javac '%' -d /tmp/ && java /tmp/'%'
         elseif &filetype == 'markdown'
-            :exec '!glow' a:arq
+            :MarkdownPreview
         elseif &filetype == 'python'
             :exec '!python3' a:arq
         elseif &filetype == 'c'
@@ -236,7 +250,7 @@ cmd([[
 ------------------------------------------------------------------------- sitax
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "c", "lua", "cpp", "java", "bash", "javascript" },
+  ensure_installed = { "c", "lua", "cpp", "java", "bash", "fish", "javascript" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = true,

@@ -213,178 +213,59 @@ J junta duas linhas
 
 ## vim-emmet
 
-**`div`**
+**`>filho`**
+**`.class`**
+**`#id`**
+**`+ irmao`**
+**`* mutiplica a tag`**
+**`$ atributo pra numera`**
+**`{texto}`**
 
-```html
-<div></div>
+<!-- **`<símbolo volta para o pai; ou seja, o oposto de >.`** -->
+
+ex: **`.class#id>h1{texto}+p.class-${mais texto}*2>p.class-${mais texto}*2`**
+
 ```
-
-**`div#header`**
-
-```html
-<div
-  id="header"
-></div>
-```
-
-**`div.align-left#header`**
-
-```html
-<div
-  id="header"
-  class="align-left"
-></div>
-```
-
-**`div#header + div#footer`**
-
-```html
-<div
-  id="header"
-></div>
-<div
-  id="footer"
-></div>
-```
-
-**`#menu > ul`**
-
-```html
-<div
-  id="menu"
->
-  <ul></ul>
-</div>
-```
-
-**`#menu > h3 + ul`**
-
-```html
-<div
-  id="menu"
->
-  <h3></h3>
-  <ul></ul>
-</div>
-```
-
-**`#header > h1{Welcome to our site}`**
-
-```html
-<div
-  id="header"
->
-  <h1>
-    Welcome
-    to
-    our
-    site
-  </h1>
-</div>
-```
-
-**`a[href=index.html]{Home}`**
-
-```html
-<a
-  href="index.html"
-  >Home</a
->
-```
-
-**`ul > li*3`**
-
-```html
-<ul>
-  <li></li>
-  <li></li>
-  <li></li>
-</ul>
-```
-
-**`ul > li.item-$*3`**
-
-```html
-<ul>
-  <li
-    class="item-1"
-  ></li>
-  <li
-    class="item-2"
-  ></li>
-  <li
-    class="item-3"
-  ></li>
-</ul>
-```
-
-**`ul > li.item-$*3 > strong`**
-
-```html
-<ul>
-  <li
-    class="item-1"
-  >
-    <strong></strong>
-  </li>
-  <li
-    class="item-2"
-  >
-    <strong></strong>
-  </li>
-  <li
-    class="item-3"
-  >
-    <strong></strong>
-  </li>
-</ul>
-```
-
-**`table > tr*2 > td.name + td*3`**
-
-```html
-<table>
-  <tr>
-    <td
-      class="name"
-    ></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td
-      class="name"
-    ></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</table>
-```
-
-**`#header > ul > li < p{Footer}`**
-
-```html
-<!-- The < symbol goes back up the parent; i.e., the opposite of >. -->
-<div
-  id="header"
->
-  <ul>
-    <li></li>
-  </ul>
-  <p>
-    Footer
-  </p>
+<div class="class" id="id">
+    <h1>texto</h1>
+    <p class="class-1">
+        mais texto
+        <p class="class-1">mais texto</p>
+        <p class="class-2">mais texto</p>
+    </p>
+    <p class="class-2">
+        mais texto
+        <p class="class-1">mais texto</p>
+        <p class="class-2">mais texto</p>
+    </p>
 </div>
 ```
 
 ## coc-explorer
 
 ```
+"<tab>": "Menu de ação",
+"?": "ajuda",
+"q": "sair",
+"<esc>": "esc",
+"f": "pesquisar",
+"F": "pesquisa recursiva",
+"a":  "adicionar arquivo",
+"A":  "adicionar diretório",
+"r":  "renomear",
+"yp": "copiar caminho de arquivo",
+"yn": "copiar nome do arquivo",
+"yy": "copiar arquivo",
+"dd": "cortar arquivo",
+"p":  "colar arquivo",
+"df": "excluir",
+"dF": "excluir para sempre",
+
+```
+
 Abrir diretório
 
-"<tab>": "Menu de ação",
+```
 "gk": ["esperar", "anterior expansível"],
 "gj": ["esperar", "expansível Próximo"],
 "h": ["esperar", "recolher"],
@@ -394,8 +275,11 @@ Abrir diretório
 "gl": ["esperar", "expandir:recursivo"],
 "gh": ["esperar", "recolher:recursivo"],
 
+```
+
 Abrira arquivo
 
+```
 "o": ["esperar", "expandido?", "recolher", "expandir"],
 "<cr>": ["esperar", "expansível?", "cd", "abrir"],
 "e": "abrir",
@@ -410,39 +294,9 @@ Abrira arquivo
 "Ic": "preview Ao passar o mouse:toggle:content",
 "II": "visualização ao passar o mouse: desabilitar",
 
-Copiar Excluir
+```
 
-"yp": "copiar caminho de arquivo",
-"yn": "copiar nome do arquivo",
-"yy": "copiar arquivo",
-"dd": "cortar arquivo",
-"p": "colar arquivo",
-"df": "excluir",
-"dF": "excluir para sempre",
-
-Renomear e add
-
-"a": "adicionar arquivo",
-"A": "adicionar diretório",
-"r": "renomear",
-
-Visualizar pastas ocutas
-
-"zh": "alternar Oculto",
-"g<ponto>": "alternar Oculto",
-"R": "atualizar",
-
-
-"?": "ajuda",
-"q": "sair",
-"<esc>": "esc",
-"X": "execução do sistema",
-"gd": "lista tDrive",
-
-Pesquisar
-
-"f": "pesquisar",
-"F": "pesquisa recursiva",
+```
 
 "gf": "ir para Fonte:arquivo",
 "gb": "ir para Fonte:buffer",
@@ -461,18 +315,12 @@ Pesquisar
 "[D": ["esperar", "marcar Prev:erro de diagnóstico"],
 "]D": ["wait", "mark Next:diagnostic Error"],
 
-Git
-
-"[c": ["esperar", "marcar Prev:git"],
-"]c": ["wait", "mark Next:git"],
-"<<": "git Stage",
-">>": "git Unstage"
-
 ```
 
 # muti-curso
 
 ```
+
 selecione palavras com Ctrl-N (como Ctrl-d em Sublime Text/VS Code)
 crie cursores verticalmente com Ctrl-Down/Ctrl-Up
 selecione um caractere de cada vez com Shift-Setas
@@ -481,9 +329,10 @@ pressione [/] para selecionar o cursor seguinte/anterior
 pressione q para pular atual e obter a próxima ocorrência
 pressione Q para remover o cursor/seleção atual
 inicie o modo de inserção com i,a,I,A
-Dois modos principais:
+
 ```
 
 <p style="display: inline_block">
     <img alt="Vim" src="Vim.png" height="75" width="100" alt="logo do vim">
 </p>
+```
