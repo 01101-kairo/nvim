@@ -91,12 +91,10 @@ require('packer').startup(function(use)
     -- use {'pope/vim-fugitive'}
     use {'L3MON4D3/LuaSnip', tag = 'v<CurrentMajor>.*'}
     use {'neoclide/coc.nvim', branch = 'release'}
+    use 'AndrewRadev/tagalong.vim'
 
-    -- install without yarn or npm
-    use{
-        'iamcco/markdown-preview.nvim',
-        run = function() vim.fn['mkdp#util#install']() end,
-    }
+    -- live-server
+    use 'manzeloth/live-server'
     use{
         'turbio/bracey.vim',
         -- fazer o run manualmente na pasta
@@ -104,8 +102,16 @@ require('packer').startup(function(use)
         run = 'npm install --prefix server',
     }
     use 'dense-analysis/ale'
-    use{ 'iamcco/markdown-preview.nvim', run = 'cd app && npm install', setup = function() vim.g.mkdp_filetypes = { 'markdown' } end, ft = { 'markdown' }, }
+
+    -- install without yarn or npm
+    use{ 'iamcco/markdown-preview.nvim',
+        run = function() vim.fn['mkdp#util#install']() end,
+    }
+    use{
+        'iamcco/markdown-preview.nvim',
+        run = 'cd app && npm install', setup = function() vim.g.mkdp_filetypes = { 'markdown' } end, ft = { 'markdown' }, }
 end)
+
 ----------------------------------------------------------------------- Key Map
 keymap("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
 keymap("n","<F7>",":set foldmethod=indent<CR>",ns) -- za desdobrar um por um, space tudo de uma vez
@@ -218,7 +224,52 @@ require("indent_blankline").setup {
 -------------------------------------------------------------- PARA O COLORIZER
 require('colorizer').setup()
 ----------------------------------------------------------------------- lualine
-require('lualine').setup()
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {
+        {'branch',icon = '',color = { fg = '#a9a1e1'},},
+        {'diff', symbols = {added = '+', modified = '~', removed = '-'},},
+        {'diagnostics',sources = { 'ale' },
+            symbols = { error = ' ', warn = ' ', info = ' ' },
+        }
+    },
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+},
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
 -------------------------------------------------------------------- bufferline
 require("bufferline").setup{}
 diagnostics_indicator = function(count, level, diagnostics_dict, context)
@@ -238,7 +289,7 @@ cmd([[
         elseif &filetype == 'Java'
             :!javac '%' -d /tmp/ && java /tmp/'%'
         elseif &filetype == 'markdown'
-            :MarkdownPreview
+            :MarkdownPreviewToggle
         elseif &filetype == 'python'
             :exec '!python3' a:arq
         elseif &filetype == 'c'
@@ -250,7 +301,7 @@ cmd([[
 ------------------------------------------------------------------------- sitax
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "c", "lua", "cpp", "java", "bash", "fish", "javascript" },
+  ensure_installed = { "c", "lua", "cpp", "java", "bash", "fish", "javascript", "html", "css" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = true,

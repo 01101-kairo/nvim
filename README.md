@@ -225,7 +225,7 @@ J junta duas linhas
 
 ex: **`.class#id>h1{texto}+p.class-${mais texto}*2>p.class-${mais texto}*2`**
 
-```
+```html
 <div class="class" id="id">
     <h1>texto</h1>
     <p class="class-1">
@@ -335,4 +335,3 @@ inicie o modo de inserção com i,a,I,A
 <p style="display: inline_block">
     <img alt="Vim" src="Vim.png" height="75" width="100" alt="logo do vim">
 </p>
-```
