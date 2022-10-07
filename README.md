@@ -51,6 +51,7 @@ troca todas as palavras por outra sem o argumento g troca apenas a primeira ocor
 :x  sai e salva
 :wa salva todos os arquivos abertos
 :wqa sai e salva todos os arquivos abertos
+:<comando>! forca comando
 ```
 
 # Movese
@@ -95,13 +96,39 @@ ggVG seleciona tudo, se aperta ==  indenta tudo
 ^wc fecha a janela atual
 ^w h j k l mover para janela
 ```
+## Macro
+```
+q<letter><commands>q
+<number>@<letter>
+```
 
 ## RegeExr
 
 ```
-$ vai pro fim da linha
-^ vai pro inicio da linha
-:<comando>! forca comando
+:%s substui em todo arquivo
+/ busca
+
+$ fim de linha
+^ inicio de linha
+. tudo
+* zero ou mais
+\+ um ou mais
+\? pode exitir ou não
+\| porta or
+[] grupos
+{} quantificador
+[^] not
+\<\> limite
+
+()@: non-capturing grup
+()@! negative lookahead
+()@= positive lookahead
+
+\ escap
+\d digito
+\w word
+\s espace
+\n pulo de limha
 ```
 
 # comandos
