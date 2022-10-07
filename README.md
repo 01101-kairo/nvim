@@ -9,6 +9,7 @@
 - [exit](#exit)
 - [Movese](#Movese)
 - [Atalhos](#Atalhos)
+- [Macro](#Macro)
 - [RegeExr vim](#RegeExr)
 - [comando](#comandos)
 - [set](#set)
