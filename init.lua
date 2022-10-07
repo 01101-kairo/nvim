@@ -112,6 +112,24 @@ require('packer').startup(function(use)
         run = 'cd app && npm install', setup = function() vim.g.mkdp_filetypes = { 'markdown' } end, ft = { 'markdown' }, }
 end)
 
+----------------------------------------------------------------------- Run COD
+cmd([[
+    function! Run(arq)
+        :w
+        if &filetype == 'html'
+            :Bracey
+        elseif &filetype == 'Java'
+            :!javac '%' -d /tmp/ && java /tmp/'%'
+        elseif &filetype == 'markdown'
+            :MarkdownPreviewToggle
+        elseif &filetype == 'python'
+            :exec '!python3' a:arq
+        elseif &filetype == 'c'
+            :exec '!clang -o /tmp/a.out' a:arq ';/tmp/a.out'
+        endif
+    endfunctio
+]])
+
 ----------------------------------------------------------------------- Key Map
 keymap("n","<F5>",":call Run(shellescape(@%, 1))<CR>",ns)
 keymap("n","<F7>",":set foldmethod=indent<CR>",ns) -- za desdobrar um por um, space tudo de uma vez
@@ -246,7 +264,7 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {
-        {'branch',icon = '',color = { fg = '#a9a1e1'},},
+        {'branch',icon = '',color = { fg = '#f6f6f6'},},
         {'diff', symbols = {added = '+', modified = '~', removed = '-'},},
         {'diagnostics',sources = { 'ale' },
             symbols = { error = ' ', warn = ' ', info = ' ' },
@@ -280,24 +298,6 @@ diagnostics_indicator = function(count, level, diagnostics_dict, context)
 end
 -------------------------------------------------------------------- comentario
 require('Comment').setup()
------------------------------------------------------------------------ Run COD
-cmd([[
-    function! Run(arq)
-        :w
-        if &filetype == 'html'
-            :Bracey
-        elseif &filetype == 'Java'
-            :!javac '%' -d /tmp/ && java /tmp/'%'
-        elseif &filetype == 'markdown'
-            :MarkdownPreviewToggle
-        elseif &filetype == 'python'
-            :exec '!python3' a:arq
-        elseif &filetype == 'c'
-            :exec '!clang -o /tmp/a.out' a:arq ';/tmp/a.out'
-        endif
-    endfunctio
-]])
-
 ------------------------------------------------------------------------- sitax
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
