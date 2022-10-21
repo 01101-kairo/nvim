@@ -1,109 +1,96 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": [
-        "*"
-    ],
-    "suggest.languageSourcePriority": 99,
-    "suggest.timeout": 500,
-    "suggest.snippetIndicator": " \ue796",
-    "suggest.completionItemKindLabels": {
-        "default": "\uf29c",
-        "method": "  ",
-        // "method": "\uf09a",
-        "function": "  ",
-        // "function": "\u0192",
-        "variable": "[]",
-        // "variable": "\ue79b",
-        "field": "  ",
-        // "field": "\uf9be",
-        "struct": "  ",
-        // "struct": "\ufb44",
-        "event": "  ",
-        // "event": "\ufacd",
-        "property": "  ",
-        // "property": "\ue624",
-        "reference": "  ",
-        // "reference": "\ufa46",
-        "file": "  ",
-        // "file": "\uf723",
-        "color": "  ",
-        // "color": "\ue22b",
-        "constructor": "  ",
-        "typeParameter": "<>",
-        // "typeParameter": "\uf728",
-        "enumMember": "  ",
-        // "enumMember": "\uf02b",
-        "class": "\uf0e8",
-        "snippet": "\ue60b",
-        "keyword": "\uf1de",
-        "interface": "\uf417",
-        "enum": "\uf435",
-        "unit": "\uf475",
-        "folder": "\uf114",
-        // "text": "  ",
-        "text": "\ue612",
-        // "constant": "  ",
-        "constant": "\uf8fe",
-        // "operator": "  ",
-        "operator": "\u03a8",
-        // "module": "  ",
-        "module": "\uf40d",
-        // "value": "  ",
-        "value": "\uf89f"
-    },
-    "diagnostic.displayByAle": true,
-    // coc-explorer
-    "explorer.width": 36,
-    "explorer.file.column.filename.width": 20,
-    "explorer.file.showHiddenFiles": true,
-    "explorer.icon.enableNerdfont": true,
-    "explorer.sources": [
-        {
-            "name": "file",
-            "expand": true
-        }
-    ],
-    "explorer.file.columns": [
-        "indent",
-        "selection",
-        "icon",
-        "filename",
-        "size",
-        "readonly"
-    ],
-    // "explorer.keyMappings": {
-    //     "<tab>": "toggleSelection",
-    // },
-    "explorer.icon.expanded": " ",
-    "explorer.icon.collapsed": " ",
-    "explorer.icon.selected": "",
-    "explorer.file.column.git.icon.unmodified": "  ",
-    "explorer.file.column.git.icon.mixed": "* ",
-    "explorer.file.column.git.icon.modified": " ",
-    "explorer.file.column.git.icon.untracked": " ",
-    "explorer.file.column.git.icon.deleted": " ",
-    "explorer.file.column.git.icon.added": " ",
-    // coc-emmet
-    "emmet.includeLanguages": {
-        "vue-html": "html",
-        "javascript": "javascriptreact"
-    },
-    // coc-python
-    "python.pythonPath": "/usr/bin/python3",
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": [
-        "--ignore=E501,E402,F401,E701"
-    ],
-    "python.formatting.provider": "autopep8",
-    "python.formatting.autopep8Args": [
-        "--ignore=E501"
-    ],
-    // coc-yaml
-    "yaml.validate": true,
-    "yaml.format.enable": true,
-    "yaml.completion": true,
-    "prettier.formatterPriority": -1,
-    "prettier.printWidth": 0,
-    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.0/clangd_15.0.0/bin/clangd"
+  "coc.preferences.formatOnSaveFiletypes": [
+    "*"
+  ],
+  "suggest.languageSourcePriority": 99,
+  "suggest.timeout": 500,
+  "suggest.snippetIndicator": " \ue796",
+  "suggest.completionItemKindLabels": {
+    "default": "\uf29c",
+    "method": "\uf09a",
+    "function": "\u0192",
+    "variable": "[]",
+    // "variable": "\ue79b",
+    "field": "  ",
+    // "field": "\uf9be",
+    "struct": "  ",
+    // "struct": "\ufb44",
+    "event": "  ",
+    // "event": "\ufacd",
+    "property": "  ",
+    // "property": "\ue624",
+    "reference": "  ",
+    // "reference": "\ufa46",
+    "file": "  ",
+    // "file": "\uf723",
+    "color": "  ",
+    // "color": "\ue22b",
+    "constructor": "  ",
+    "typeParameter": "\uf728",
+    "enumMember": "  ",
+    // "enumMember": "\uf02b",
+    "class": "\uf0e8",
+    "snippet": "\ue60b",
+    "keyword": "\uf1de",
+    "interface": "\uf417",
+    "enum": "\uf435",
+    "unit": "\uf475",
+    "folder": "\uf114",
+    "text": "\ue612",
+    "constant": "\uf8fe",
+    "operator": "\u03a8",
+    "module": "\uf40d",
+    "value": "\uf89f"
+  },
+  "diagnostic.displayByAle": true,
+  // coc-explorer
+  "explorer.width": 36,
+  "explorer.file.column.filename.width": 20,
+  "explorer.file.showHiddenFiles": true,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.sources": [
+    {
+      "name": "file",
+      "expand": true
+    }
+  ],
+  "explorer.file.columns": [
+    "indent",
+    "selection",
+    "icon",
+    "filename",
+    "size",
+    "readonly"
+  ],
+  "explorer.icon.expanded": " ",
+  "explorer.icon.collapsed": " ",
+  "explorer.icon.selected": "",
+  "explorer.file.column.git.icon.unmodified": "  ",
+  "explorer.file.column.git.icon.mixed": "* ",
+  "explorer.file.column.git.icon.modified": " ",
+  "explorer.file.column.git.icon.untracked": " ",
+  "explorer.file.column.git.icon.deleted": " ",
+  "explorer.file.column.git.icon.added": " ",
+  // coc-emmet
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "javascript": "javascriptreact"
+  },
+  // coc-python
+  "python.pythonPath": "/usr/bin/python3",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": [
+    "--ignore=E501,E402,F401,E701"
+  ],
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Args": [
+    "--ignore=E501"
+  ],
+  // coc-yaml
+  "yaml.validate": true,
+  "yaml.format.enable": true,
+  "yaml.completion": true,
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.0/clangd_15.0.0/bin/clangd"
 }
