@@ -1,3 +1,10 @@
+/*
+coc-clangd coc-eslint coc-explorer coc-html coc-java
+coc-java-debug coc-java-dependency coc-java-vimspector
+coc-json coc-lists coc-omnisharp coc-pairs coc-python
+coc-sh coc-texlab coc-vetur coc-yaml coc-css coc-html-css-support
+coc-cssmodules coc-emmet coc-diagnostic coc-pyls coc-snippets coc-tsserver
+*/
 {
   "coc.preferences.formatOnSaveFiletypes": [
     "*"
