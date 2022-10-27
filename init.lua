@@ -1,19 +1,3 @@
-local set = vim.opt
-local g = vim.g
-local key = vim.keymap.set
-local fn = vim.fn.expand
-local opts = { noremap = true, silent = true }
-local toggle_modes = {'n', 't'}
-local terminal = require("nvterm.terminal")
-
-local ft_cmds = {
-  python = "python3 " .. fn('%'),
-  javascript = "node " .. fn('%'),
-  c = "run " .. fn('%'),
-  java = "run " .. fn('%'),
-  html = "live-server $(pwd) ",
-}
-
 -- Plugins ====================================================================
 require "plugins"
 -- Settings ===================================================================
@@ -30,6 +14,7 @@ set nowrap  " linha longa
 set encoding=utf8  " sou br é eu escrevo em portugues eu acho
 ]]
 
+local set = vim.opt
 set.clipboard = 'unnamedplus' -- compartilhamento de área de trasferencia
 set.history=500         -- 500 é um numero grande
 set.smarttab=true
@@ -48,7 +33,6 @@ set.showmode = false
 set.smartindent=true    -- ativa autoindent da linguagens que eu tiver trabalhondo
 -- vim.o.backspace = 2  -- para o backspace se comportar como a gente gosta
 set.softtabstop= 2      -- numero de espaços que deve-se dar quando apertar o TAB
--- o python tem o tab de 4 spaces devido o coc
 set.tabstop=2      -- show existing tab with 2 spaces width
 set.shiftwidth=2   -- when indenting with '>', use 2 spaces width
 
@@ -103,44 +87,74 @@ endif
 
 -- Keymap =====================================================================
 ----------------------------------------------------------------------- Key Map
+local keymap = vim.keymap.set
+local nl = { noremap = true, silent = true }
+local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
+local toggle_modes = {'n', 't'}
+local terminal = require("nvterm.terminal")
+local fn = vim.fn.expand
+local ft_cmds = {
+  python = "python3 " .. fn('%'),
+  javascript = "node " .. fn('%'),
+  c = "run " .. fn('%'),
+  java = "run " .. fn('%'),
+  html = "live-server $(pwd) ",
+  css = "live-server $(pwd) ",
+}
 -- Coc keymap
-vim.cmd [[inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]]
-vim.cmd [[inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"]]
-vim.cmd [[inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]]
-
+keymap("i", "<TAB>", [[coc#pum#visible() ? coc#pum#next(1) : "<TAB>"]], opts)
+keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+keymap("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], opts)
 local mappings = {
-  { 'n', '<F5>', function () require("nvterm.terminal").send(ft_cmds[vim.bo.filetype]) end },
-  { 'n', '<F7>', ':set foldmethod=indent<CR>', opts}, -- za desdobrar um por um, space tudo de uma vez
-  { 'n', '<C-s>', ':w<CR>', opts}, -- save
-  { 'n', '<C-q>', ':bp |bd #<CR>', opts}, -- quit
-  { 'n', '<M-l>', ':bn<CR>', opts}, --navigate right
-  { 'n', '<M-h>', ':bp<CR>', opts}, -- navigate left
-  -- toggle
-  { 'n', '<C-h>', ':CocCommand explorer<CR>', opts},
-  { 'i', '<C-h>', '<ESC>:CocCommand explorer<CR>', opts},
-  -- switch between windows
-  -- { 'n', '<C-h>', '<C-w>h', opts},
-  { 'n', '<C-l>', '<C-w>l', opts},
-  { 'n', '<C-j>', '<C-w>j', opts},
-  { 'n', '<C-k>', '<C-w>k', opts},
-
+  -- Coc explorer
+  { 'n', '<C-h>', ':CocCommand explorer<CR>', nl},
+  { 'i', '<C-h>', '<ESC>:CocCommand explorer<CR>', nl},
   -- terminal
   { toggle_modes, '<A-t>', function () terminal.toggle('horizontal') end },
   { toggle_modes, '<A-v>', function () terminal.toggle('vertical') end },
   { toggle_modes, '<A-i>', function () terminal.toggle('float') end },
+  { 'n', '<F5>', function () terminal.send(ft_cmds[vim.bo.filetype]) end },
+  -- za desdobrar um por um, space tudo de uma vez
+  { 'n', '<F7>', ':set foldmethod=indent<CR>', nl},
+  -- save
+  { 'n', '<C-s>', ':w<CR>', nl},
+  -- quit
+  { 'n', '<C-q>', ':bp |bd #<CR>', nl},
+  -- Navigate
+  { 'n', '<A-l>', ':bn<CR>', nl}, --navigate right
+  { 'n', '<A-h>', ':bp<CR>', nl}, -- navigate left
+  { 'n', '<A-Right>', ':bn<CR>', nl}, --navigate right
+  { 'n', '<A-Left>', ':bp<CR>', nl}, -- navigate left
+  -- switch between windows
+  -- { 'n', '<C-h>', '<C-w>h', nl},
+  { 'n', '<C-l>', '<C-w>l', nl},
+  { 'n', '<C-j>', '<C-w>j', nl},
+  { 'n', '<C-k>', '<C-w>k', nl},
 }
+
 for _, mapping in ipairs(mappings) do
-  key(mapping[1], mapping[2], mapping[3], opts)
+  keymap(mapping[1], mapping[2], mapping[3], nl)
 end
 
 -- Settings plugs =============================================================
 ------------------------------------------------------------------------- Color
-vim.cmd[[ let g:Hexokinase_highlighters = ['backgroundfull'] ]]
+vim.cmd[[
+let g:Hexokinase_highlighters = ['backgroundfull']
+let g:Hexokinase_optInPatterns = [
+\     'full_hex',
+\     'triple_hex',
+\     'rgb',
+\     'rgba',
+\     'hsl',
+\     'hsla',
+\     'colour_names'
+\ ]
+]]
 
 ------------------------------------------------------------------------ theme onedark
 require('onedark').setup  {
   -- Main options --
-  style = 'darker', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+  style = 'deep', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
   transparent = true,  -- Show/hide background
   term_colors = true, -- Change terminal color as per the selected theme style
   ending_tildes = true, -- Show the end-of-buffer tildes. By default they are hidden
@@ -158,8 +172,17 @@ require('onedark').setup  {
   },
 }
 
-require('onedark').load()
+-- require('onedark').load()
 
+-- Example config in lua
+vim.g.nord_contrast = true
+vim.g.nord_borders = false
+vim.g.nord_disable_background = false
+vim.g.nord_italic = false
+vim.g.nord_uniform_diff_background = true
+
+-- Load the colorscheme
+require('nord').set()
 --------------------------------------------------------------------- ColorPars
 require("nvim-treesitter.configs").setup {
   rainbow = {
@@ -177,16 +200,17 @@ require("nvim-treesitter.configs").setup {
 }
 
 --------------------------------------------------------------------- highlight
-vim.cmd [[highlight IndentBlanklineIndent1 guifg=#ff6188 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent2 guifg=#ffb86c gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent3 guifg=#50fa7b gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent6 guifg=#ff79c6 gui=nocombine]]
+vim.cmd [[
+highlight IndentBlanklineIndent1 guifg=#ff6188 gui=nocombine
+highlight IndentBlanklineIndent2 guifg=#ffb86c gui=nocombine
+highlight IndentBlanklineIndent3 guifg=#50fa7b gui=nocombine
+highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine
+highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine
+highlight IndentBlanklineIndent6 guifg=#ff79c6 gui=nocombine
 
-vim.cmd [[hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=NONE guifg=#ffffff]]
-vim.cmd [[let g:indentLine_fileTypeExclude = ['dashboard'] ]]
-
+hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=NONE guifg=#ffffff
+let g:indentLine_fileTypeExclude = ['dashboard']
+]]
 require("indent_blankline").setup {
   show_end_of_line = true,
   space_char_blankline = " ",
@@ -201,7 +225,18 @@ require("indent_blankline").setup {
 }
 
 -------------------------------------------------------------------- Bufferline
-require("bufferline").setup{}
+local highlights = require("nord").bufferline.highlights({
+    italic = true,
+    bold = true,
+    fill = "#181c24"
+})
+require("bufferline").setup({
+options = {
+        separator_style = "thin",
+    },
+    highlights = highlights,
+})
+
 diagnostics_indicator = function(count, level, diagnostics_dict, context)
   if context.buffer:current() then
     return ''
@@ -213,7 +248,8 @@ end
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'auto',
+    theme =  'nord',
+    -- 'auto',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {
@@ -268,20 +304,19 @@ require'nvim-treesitter.configs'.setup {
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = true,
-
   highlight = {
     enable = true,
     use_languagetree = true,
   },
-
   indent = {
     enable = true,
   },
-
   additional_vim_regex_highlighting = false,
 }
 
 --------------------------------------------------------------------------- Ale
+local g = vim.g
+
 g['ale_echo_msg_error_str'] = 'E'
 g['ale_echo_msg_warning_str'] = 'W'
 g['ale_echo_msg_format'] = '[%linter%] %s [%severity%]'
@@ -308,17 +343,16 @@ endfunction
 
 set statusline+=%=
 set statusline+=\ %{LinterStatus()}
-]]
 
-vim.cmd [[
-let g:ale_linters = {'python': ['flake8', 'pylint'],'javascript': ['eslint'],'cpp':[],'c': [],}
-]]
-
-vim.cmd [[
+let g:ale_linters = {
+  \'python': ['flake8', 'pylint'],
+  \'javascript': ['eslint'],
+  \'cpp':['clang'],
+  \'c': ['clang'],
+  \'bash':['bashls'],
+  \'lua':['sumneko_lua']
+\}
 let g:ale_fixers = {'*': ['trim_whitespace'],'cpp': ['clang-format'],'c': ['clang-format'],}
-]]
-
-vim.cmd [[
 let g:ale_c_clangformat_options ='"-style={
   \ BasedOnStyle: google,
   \ IndentWidth: 2,
@@ -329,3 +363,21 @@ let g:ale_c_clangformat_options ='"-style={
   \ ReflowComments: false,
 \ }"'
 ]]
+-- ======================================================================== Lsp
+-- require("nvim-lsp-installer").setup({
+--     -- List of servers to automatically install
+--     ensure_installed = {'pyright', 'tsserver', 'eslint', 'bashls', 'cssls', 'html', 'sumneko_lua', 'jsonls', 'clangd', 'lemminx' },
+--     -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+--     automatic_installation = true,
+--     ui = {
+--         icons = {
+--             server_installed = "✓",
+--             server_pending = "➜",
+--             server_uninstalled = "✗"
+--         }
+--     }
+-- })
+-- -- LSPs with default setup: bashls (Bash), cssls (CSS), html (HTML), clangd (C/C++), jsonls (JSON),eslint (JS),tsserver (Typescript), pyright (Python), sumneko_lua (Lua), jdtls (Java)
+-- for _, lsp in ipairs { 'bashls', 'cssls', 'html', 'clangd', 'jsonls','eslint','tsserver','pyright','sumneko_lua','jdtls'} do
+--   require('lspconfig')[lsp].setup {}
+-- end

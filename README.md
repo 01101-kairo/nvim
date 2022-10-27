@@ -289,59 +289,13 @@ ex: **`.class#id>h1{texto}+p.class-${mais texto}*2>p.class-${mais texto}*2`**
 "df": "excluir",
 "dF": "excluir para sempre",
 
-```
-
-Abrir diretório
-
-```
-"gk": ["esperar", "anterior expansível"],
-"gj": ["esperar", "expansível Próximo"],
-"h": ["esperar", "recolher"],
-"l": ["esperar", "expansível?", "expandir", "abrir"],
-"J": ["esperar", "alternar Seleção", "normal:j"],
-"K": ["esperar", "alternar Seleção", "normal:k"],
-"gl": ["esperar", "expandir:recursivo"],
-"gh": ["esperar", "recolher:recursivo"],
-
-```
-
-Abrira arquivo
-
-```
-"o": ["esperar", "expandido?", "recolher", "expandir"],
-"<cr>": ["esperar", "expansível?", "cd", "abrir"],
-"e": "abrir",
-"s": "abrir:dividir",
-"E": "abrir:vsplit",
-"t": "abrir: aba",
-"<bs>": ["esperar", "ir para pai"],
-"gs": ["esperar", "reveal:selecionar"],
-"il": "preview:rotulagem",
-"ic": "visualização:conteúdo",
-"Il": "preview Ao passar o mouse:toggle:labeling",
-"Ic": "preview Ao passar o mouse:toggle:content",
-"II": "visualização ao passar o mouse: desabilitar",
-
-```
-
-```
-
-"gf": "ir para Fonte:arquivo",
-"gb": "ir para Fonte:buffer",
-
-"[[": ["esperar", "fonte anterior"],
-"]]": ["esperar", "fonte Próxima"],
-
-"[i": ["esperar", "recuar anterior"],
-"]i": ["esperar", "recuar próximo"],
-
-"[m": ["esperar", "marcar Prev:modificado"],
-"]m": ["esperar", "marcar Próximo:modificado"],
-
-"[d": ["wait", "mark Prev:diagnostic Error:diagnostic Warning"],
-"]d": ["wait", "mark Next:diagnostic Error:diagnostic Warning"],
-"[D": ["esperar", "marcar Prev:erro de diagnóstico"],
-"]D": ["wait", "mark Next:diagnostic Error"],
+"o": "expandido? diretório", "recolher", "expandir"],
+"il": "preview arquivo:rotulagem",
+"ic": "visualização arquivo:conteúdo",
+"e": "abrir arquivo",
+"t": "abrir arquivo:em aba",
+"s": "abrir arquivo:dividir",
+"E": "abrir arquivo:vsplit",
 
 ```
 
