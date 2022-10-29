@@ -23,7 +23,7 @@
 - [Cola](#Cola)
 - [Recorta](#Recorta)
 - [Junta](#junta)
-- [vim-emmet](#vim-emmet)
+- [Nvtree](#Nvterm)
 - [coc-explorer](#coc-explorer)
 - [muti-cursor](#muti-curso)
 
@@ -269,33 +269,58 @@ ex: **`.class#id>h1{texto}+p.class-${mais texto}*2>p.class-${mais texto}*2`**
 </div>
 ```
 
-## coc-explorer
+## Nvtree HELP g? : toggle_help
 
 ```
-"<tab>": "Menu de ação",
-"?": "ajuda",
-"q": "sair",
-"<esc>": "esc",
-"f": "pesquisar",
-"F": "pesquisa recursiva",
-"a":  "adicionar arquivo",
-"A":  "adicionar diretório",
-"r":  "renomear",
-"yp": "copiar caminho de arquivo",
-"yn": "copiar nome do arquivo",
-"yy": "copiar arquivo",
-"dd": "cortar arquivo",
-"p":  "colar arquivo",
-"df": "excluir",
-"dF": "excluir para sempre",
-
-"o": "expandido? diretório", "recolher", "expandir"],
-"il": "preview arquivo:rotulagem",
-"ic": "visualização arquivo:conteúdo",
-"e": "abrir arquivo",
-"t": "abrir arquivo:em aba",
-"s": "abrir arquivo:dividir",
-"E": "abrir arquivo:vsplit",
+   bmv : bulk_move
+ <C-]> : cd
+<2-RightMouse> : cd
+     F : clear_live_filter
+     q : close
+  <BS> : close_node
+     W : collapse_all
+     c : copy
+    gy : copy_absolute_path
+     y : copy_name
+     Y : copy_path
+     a : create
+     x : cut
+     - : dir_up
+     u : dir_up
+  <CR> : edit
+     o : edit
+<2-LeftMouse> : edit
+ <C-e> : edit_in_place
+     O : edit_no_picker
+     E : expand_all
+     K : first_sibling
+ <C-r> : full_rename
+     J : last_sibling
+     f : live_filter
+    ]e : next_diag_item
+    ]c : next_git_item
+     > : next_sibling
+     P : parent_node
+     p : paste
+    [e : prev_diag_item
+    [c : prev_git_item
+     < : prev_sibling
+ <Tab> : preview
+     R : refresh
+     d : remove
+     r : rename
+     . : run_file_command
+     S : search_node
+ <C-x> : split
+     s : system_open
+ <C-t> : tabnew
+     U : toggle_custom
+     H : toggle_dotfiles
+ <C-k> : toggle_file_info
+     I : toggle_git_ignored
+     m : toggle_mark
+     D : trash
+ <C-v> : vsplit
 
 ```
 

@@ -1,20 +1,7 @@
--- Plugins ====================================================================
-require "plugins"
 -- Settings ===================================================================
 ---------------------------------------------------------------------- Settings
-vim.cmd[[
-syntax on
-filetype on
-filetype plugin on
-filetype indent on
-filetype plugin indent on
-set diffopt& diffopt+=algorithm:histogram,indent-heuristic
-set is hls ic scs  " opções de busca
-set nowrap  " linha longa
-set encoding=utf8  " sou br é eu escrevo em portugues eu acho
-]]
-
 local set = vim.opt
+
 set.clipboard = 'unnamedplus' -- compartilhamento de área de trasferencia
 set.history=500         -- 500 é um numero grande
 set.smarttab=true
@@ -71,60 +58,51 @@ set.title=true -- exibe alguma coisa na bara do terminal
 set.autoindent=true -- aoutoindent
 set.wildmenu=true -- menuzinho de completar comandos vim
 set.confirm=true -- confirma exit
--- go to previous/next line with h,l,left arrow and right arrow
--- when cursor reaches end/beginning of line
-set.whichwrap:append "<>[]hl"
-
--- termguicolors
-vim.cmd [[
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set t_Co=256
-  set termguicolors
-endif
-]]
+set.whichwrap:append "<>[]hl" -- when cursor reaches end/beginning of line
+set.wrap = false -- linha longa
 
 -- Keymap =====================================================================
 ----------------------------------------------------------------------- Key Map
 local keymap = vim.keymap.set
 local nl = { noremap = true, silent = true }
-local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
 local toggle_modes = {'n', 't'}
 local terminal = require("nvterm.terminal")
 local fn = vim.fn.expand
 local ft_cmds = {
-  python = "python3 " .. fn('%'),
-  javascript = "node " .. fn('%'),
   c = "run " .. fn('%'),
-  java = "run " .. fn('%'),
+  javascript = "node " .. fn('%'),
   html = "live-server $(pwd) ",
   css = "live-server $(pwd) ",
+  python = "python3 " .. fn('%'),
+  java = "run " .. fn('%'),
 }
+
+local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
 -- Coc keymap
 keymap("i", "<TAB>", [[coc#pum#visible() ? coc#pum#next(1) : "<TAB>"]], opts)
-keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+keymap("i", "<M-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+keymap("i", "<space>", [[coc#pum#visible() ? coc#pum#confirm() : "\<space>"]], opts)
 keymap("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], opts)
 local mappings = {
-  -- Coc explorer
-  { 'n', '<C-h>', ':CocCommand explorer<CR>', nl},
-  { 'i', '<C-h>', '<ESC>:CocCommand explorer<CR>', nl},
-  -- terminal
+  -- Explorer
+  { 'n', '<C-h>', ':NvimTreeToggle <CR>', nl},
+  { 'i', '<C-h>', '<ESC>:NvimTreeToggle<CR>', nl},
+  -- Terminal
   { toggle_modes, '<A-t>', function () terminal.toggle('horizontal') end },
   { toggle_modes, '<A-v>', function () terminal.toggle('vertical') end },
   { toggle_modes, '<A-i>', function () terminal.toggle('float') end },
   { 'n', '<F5>', function () terminal.send(ft_cmds[vim.bo.filetype]) end },
   -- za desdobrar um por um, space tudo de uma vez
   { 'n', '<F7>', ':set foldmethod=indent<CR>', nl},
-  -- save
+  -- Save
   { 'n', '<C-s>', ':w<CR>', nl},
   -- quit
   { 'n', '<C-q>', ':bp |bd #<CR>', nl},
   -- Navigate
-  { 'n', '<A-l>', ':bn<CR>', nl}, --navigate right
-  { 'n', '<A-h>', ':bp<CR>', nl}, -- navigate left
-  { 'n', '<A-Right>', ':bn<CR>', nl}, --navigate right
-  { 'n', '<A-Left>', ':bp<CR>', nl}, -- navigate left
+  { 'n', '<A-l>', ':bn<CR>', nl},
+  { 'n', '<A-h>', ':bp<CR>', nl},
+  { 'n', '<A-Right>', ':bn<CR>', nl},
+  { 'n', '<A-Left>', ':bp<CR>', nl},
   -- switch between windows
   -- { 'n', '<C-h>', '<C-w>h', nl},
   { 'n', '<C-l>', '<C-w>l', nl},
@@ -136,26 +114,30 @@ for _, mapping in ipairs(mappings) do
   keymap(mapping[1], mapping[2], mapping[3], nl)
 end
 
+-- Plugins ====================================================================
+require "plugins"
 -- Settings plugs =============================================================
 ------------------------------------------------------------------------- Color
 vim.cmd[[
 let g:Hexokinase_highlighters = ['backgroundfull']
-let g:Hexokinase_optInPatterns = [
-\     'full_hex',
-\     'triple_hex',
-\     'rgb',
-\     'rgba',
-\     'hsl',
-\     'hsla',
-\     'colour_names'
-\ ]
+let g:Hexokinase_optInPatterns = ['full_hex','triple_hex','rgb','rgba','hsl','hsla','colour_names']
 ]]
 
 ------------------------------------------------------------------------ theme onedark
+-- termguicolors
+vim.cmd [[
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set t_Co=256
+  set termguicolors
+endif
+]]
+
 require('onedark').setup  {
   -- Main options --
   style = 'deep', -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-  transparent = true,  -- Show/hide background
+  transparent = false,  -- Show/hide background
   term_colors = true, -- Change terminal color as per the selected theme style
   ending_tildes = true, -- Show the end-of-buffer tildes. By default they are hidden
   cmp_itemkind_reverse = true, -- reverse item kind highlights in cmp menu
@@ -172,24 +154,14 @@ require('onedark').setup  {
   },
 }
 
--- require('onedark').load()
-
--- Example config in lua
-vim.g.nord_contrast = true
-vim.g.nord_borders = false
-vim.g.nord_disable_background = false
-vim.g.nord_italic = false
-vim.g.nord_uniform_diff_background = true
-
--- Load the colorscheme
-require('nord').set()
+require('onedark').load()
 --------------------------------------------------------------------- ColorPars
 require("nvim-treesitter.configs").setup {
   rainbow = {
     enable = true,
     colors = {
-      "#ff6188",
       "#ffb86c",
+      "#ff6188",
       "#50fa7b",
       "#56B6C2",
       "#61AFEF",
@@ -211,6 +183,7 @@ highlight IndentBlanklineIndent6 guifg=#ff79c6 gui=nocombine
 hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=NONE guifg=#ffffff
 let g:indentLine_fileTypeExclude = ['dashboard']
 ]]
+
 require("indent_blankline").setup {
   show_end_of_line = true,
   space_char_blankline = " ",
@@ -225,33 +198,41 @@ require("indent_blankline").setup {
 }
 
 -------------------------------------------------------------------- Bufferline
-local highlights = require("nord").bufferline.highlights({
-    italic = true,
-    bold = true,
-    fill = "#181c24"
-})
-require("bufferline").setup({
-options = {
-        separator_style = "thin",
-    },
-    highlights = highlights,
-})
+require("bufferline").setup {
+  options = {
+    numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
 
-diagnostics_indicator = function(count, level, diagnostics_dict, context)
-  if context.buffer:current() then
-    return ''
-  end
-  return ''
-end
-
+    middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
+    buffer_close_icon = '',
+    modified_icon = "●",
+    close_icon = "",
+    left_trunc_marker = "",
+    right_trunc_marker = "",
+    max_name_length = 30,
+    max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
+    tab_size = 21,
+    diagnostics = false, -- | "nvim_lsp" | "coc",
+    diagnostics_update_in_insert = false,
+    offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+    show_buffer_icons = true,
+    show_buffer_close_icons = true,
+    show_close_icon = true,
+    show_tab_indicators = true,
+    persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+    separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
+    enforce_regular_tabs = true,
+    always_show_bufferline = true,
+  },
+}
 ----------------------------------------------------------------------- lualine
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme =  'nord',
-    -- 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    theme =  'auto',
+    -- component_separators = { left = '', right = ''},
+    -- section_separators = { left = '', right = ''},
+    component_separators = { left = '|', right = '|'},
+    section_separators = { left = '', right = ''},
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -270,8 +251,8 @@ require('lualine').setup {
     lualine_b = {
       {'branch',icon = '',color = { fg = '#f6f6f6'},},
       {'diff', symbols = {added = '+', modified = '~', removed = '-'},},
-      {'diagnostics',sources = { 'ale' },
-        symbols = { error = '✗ ', warn = '⚠ ', info = ' ' },
+      {'diagnostics',sources = {'nvim_lsp'},
+        symbols = { error = " ", warn = " ", info = " ", hint = " "},
       }
     },
     lualine_c = {'filename',},
@@ -292,15 +273,10 @@ require('lualine').setup {
   inactive_winbar = {},
   extensions = {}
 }
-
--------------------------------------------------------------------- Comentario
-require('Comment').setup()
------------------------------------------------------------------------- Nvterm
-require("nvterm").setup()
 ------------------------------------------------------------------------- Sitax
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "c", "lua", "cpp", "java", "bash", "fish", "javascript", "html", "css" },
+  ensure_installed = { "bash", "css", "html", "javascript",  "c", "cpp", "lua", "java" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = true,
@@ -314,70 +290,93 @@ require'nvim-treesitter.configs'.setup {
   additional_vim_regex_highlighting = false,
 }
 
---------------------------------------------------------------------------- Ale
-local g = vim.g
+--------------------------------------------------------------------- Autopairs
+require('nvim-autopairs').setup()
+-------------------------------------------------------------------- Comentario
+require('Comment').setup()
+------------------------------------------------------------------------ Nvterm
+require("nvterm").setup()
+---------------------------------------------------------------------- Examples
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
-g['ale_echo_msg_error_str'] = 'E'
-g['ale_echo_msg_warning_str'] = 'W'
-g['ale_echo_msg_format'] = '[%linter%] %s [%severity%]'
-g['ale_fix_on_save'] = 1
-g['ale_completetion_enable'] = 0
-g['neocomplete#enable_at_startup'] = 1
-g['rainbow_active']= 1
--- don't check syntax immediately on open or on quit
-g['ale_lint_on_enter'] = 0
-g['ale_lint_on_save'] = 1
+-- empty setup using defaults
+-- git:unstaged = "✗", staged = "✓", unmerged = "", renamed = "➜", untracked = "★", deleted = "", ignored = "◌"
+require("nvim-tree").setup()
 
--- error symbol to use in sidebar
-g['ale_sign_error'] = '✗'
-g['ale_sign_warning'] = '⚠'
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
 
-vim.cmd [[
-" show number of errors
-function! LinterStatus() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? 'OK' : printf('%d⨉ %d⚠ ', all_non_errors, all_errors)
-endfunction
+  renderer = {
+    group_empty = true,
+  },
 
-set statusline+=%=
-set statusline+=\ %{LinterStatus()}
+  filters = {
+    dotfiles = true,
+  },
 
-let g:ale_linters = {
-  \'python': ['flake8', 'pylint'],
-  \'javascript': ['eslint'],
-  \'cpp':['clang'],
-  \'c': ['clang'],
-  \'bash':['bashls'],
-  \'lua':['sumneko_lua']
-\}
-let g:ale_fixers = {'*': ['trim_whitespace'],'cpp': ['clang-format'],'c': ['clang-format'],}
-let g:ale_c_clangformat_options ='"-style={
-  \ BasedOnStyle: google,
-  \ IndentWidth: 2,
-  \ ColumnLimit: 100,
-  \ AllowShortBlocksOnASingleLine: Always,
-  \ AllowShortFunctionsOnASingleLine: Inline,
-  \ FixNamespaceComments: true,
-  \ ReflowComments: false,
-\ }"'
-]]
--- ======================================================================== Lsp
--- require("nvim-lsp-installer").setup({
---     -- List of servers to automatically install
---     ensure_installed = {'pyright', 'tsserver', 'eslint', 'bashls', 'cssls', 'html', 'sumneko_lua', 'jsonls', 'clangd', 'lemminx' },
---     -- automatically detect which servers to install (based on which servers are set up via lspconfig)
---     automatic_installation = true,
---     ui = {
---         icons = {
---             server_installed = "✓",
---             server_pending = "➜",
---             server_uninstalled = "✗"
---         }
---     }
--- })
--- -- LSPs with default setup: bashls (Bash), cssls (CSS), html (HTML), clangd (C/C++), jsonls (JSON),eslint (JS),tsserver (Typescript), pyright (Python), sumneko_lua (Lua), jdtls (Java)
--- for _, lsp in ipairs { 'bashls', 'cssls', 'html', 'clangd', 'jsonls','eslint','tsserver','pyright','sumneko_lua','jdtls'} do
---   require('lspconfig')[lsp].setup {}
--- end
+  log = {
+    enable = true,
+    truncate = true,
+    types = {
+      diagnostics = true,
+      git = true,
+      profile = true,
+      watcher = true,
+    },
+  },
+})
+
+------------------------------------------------------ LSPs with default setup:
+local lspconfig = require('lspconfig')
+local servers = {
+  'bashls',-- bashls (Bash)
+  'cssls', -- cssls (CSS)
+  'html', -- html (HTML)
+  'clangd', -- clangd (C/C++)
+  'jsonls',-- jsonls (JSON)
+  'eslint',-- eslint (JS)
+  'tsserver',-- tsserver (Typescript)
+  'pyright',-- pyright (Python)
+  'sumneko_lua',-- sumneko_lua (Lua)
+  'jdtls' -- jdtls (Java)
+}
+
+for _, lsp in ipairs(servers)  do
+  lspconfig[lsp].setup {
+    -- on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
+
+lspconfig.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
+}
+
+-- Diagnostics symbols for display in the sign column.
+local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+vim.cmd('setlocal omnifunc=v:lua.vim.lsp.omnifunc')
