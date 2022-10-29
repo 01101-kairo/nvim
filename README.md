@@ -1,5 +1,5 @@
 <p style="display: inline_block">
-    <img alt="Vim" src="sc.png" height="584" width="1083" alt="logo do vim">
+    <img alt="Vim" src="sc.png" height="484" width="1083" alt="logo do vim">
 </p>
 <hr>
 
