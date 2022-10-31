@@ -24,7 +24,7 @@
 - [Recorta](#Recorta)
 - [Junta](#junta)
 - [Nvtree](#Nvterm)
-- [coc-explorer](#coc-explorer)
+- [Nvtree](#Nvtree HELP g? : toggle_help)
 - [muti-cursor](#muti-curso)
 
 <hr>
