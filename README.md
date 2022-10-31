@@ -23,8 +23,8 @@
 - [Cola](#Cola)
 - [Recorta](#Recorta)
 - [Junta](#junta)
-- [Nvtree](#Nvterm)
-- [Nvtree](#Nvtree HELP g? : toggle_help)
+- [Nvterm](#Nvterm)
+- [Nvtree](#Nvtree)
 - [muti-cursor](#muti-curso)
 
 <hr>
@@ -269,9 +269,10 @@ ex: **`.class#id>h1{texto}+p.class-${mais texto}*2>p.class-${mais texto}*2`**
 </div>
 ```
 
-## Nvtree HELP g? : toggle_help
+## Nvtree 
 
 ```
+HELP g? : toggle_help
    bmv : bulk_move
  <C-]> : cd
 <2-RightMouse> : cd
