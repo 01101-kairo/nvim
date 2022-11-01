@@ -2,12 +2,12 @@
 ---------------------------------------------------------------------- Settings
 local set = vim.opt
 
-set.clipboard = 'unnamedplus' -- compartilhamento de área de trasferencia
-set.history=500         -- 500 é um numero grande
+set.clipboard = 'unnamedplus'-- compartilhamento de área de trasferencia
+set.history=500              -- 500 é um numero grande
 set.smarttab=true
-set.incsearch=true      -- isso aqui é pra 'pesquisa' ele completa palavras
+set.incsearch=true           -- isso aqui é pra 'pesquisa' ele completa palavras
 
-set.guifont={"DejaVuSansMono Nerd Font","Mono:h12"}
+-- set.guifont={"DejaVuSansMono Nerd Font","Mono:h12"}
 set.termencoding='utf8' -- Yeah!! UTF-8 em tudo!
 set.colorcolumn = '80'
 set.tw=79
@@ -17,13 +17,12 @@ set.laststatus = 3      -- global statusline
 set.showmode = false
 
 -- Indenting
-set.smartindent=true    -- ativa autoindent da linguagens que eu tiver trabalhondo
--- vim.o.backspace = 2  -- para o backspace se comportar como a gente gosta
-set.softtabstop= 2      -- numero de espaços que deve-se dar quando apertar o TAB
-set.tabstop=2      -- show existing tab with 2 spaces width
-set.shiftwidth=2   -- when indenting with '>', use 2 spaces width
+set.smartindent=true -- ativa autoindent da linguagens que eu tiver trabalhondo
+set.softtabstop= 2   -- numero de espaços que deve-se dar quando apertar o TAB
+set.tabstop=2        -- show existing tab with 2 spaces width
+set.shiftwidth=2     -- when indenting with '>', use 2 spaces width
 
-set.expandtab=true -- On pressing tab, insert 4 spaces
+set.expandtab=true   -- On pressing tab, insert 4 spaces
 
 set.fillchars = { eob = " " }
 set.ignorecase = true
@@ -39,8 +38,8 @@ set.ruler = false
 set.shortmess:append "sI"
 
 set.signcolumn = "yes"
-set.splitbelow=true -- Create the horizontal splits below
-set.splitright=true -- Create the vertical splits to the right
+set.splitbelow=true  -- Create the horizontal splits below
+set.splitright=true  -- Create the vertical splits to the right
 set.timeoutlen = 400
 set.undofile = true
 
@@ -63,7 +62,27 @@ set.wrap = false -- linha longa
 
 -- Keymap =====================================================================
 ----------------------------------------------------------------------- Key Map
-local keymap = vim.keymap.set
+local map = vim.keymap.set
+
+-- Coc keymap
+-- local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
+-- map("i", "<TAB>", [[coc#pum#visible() ? coc#pum#next(1) : "<TAB>"]], opts)
+-- map("i", "<M-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+-- map("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], opts)
+vim.cmd[[
+" press <Tab> to expand or jump in a snippet. These can also be mapped separately
+" via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+" -1 for jumping backwards.
+inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+
+snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+
+" For changing choices in choiceNodes (not strictly necessary for a basic setup).
+imap <silent><expr> <cr> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<cr>'
+smap <silent><expr> <cr> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<cr>'
+]]
 local nl = { noremap = true, silent = true }
 local toggle_modes = {'n', 't'}
 local terminal = require("nvterm.terminal")
@@ -77,12 +96,6 @@ local ft_cmds = {
   java = "run " .. fn('%'),
 }
 
-local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
--- Coc keymap
-keymap("i", "<TAB>", [[coc#pum#visible() ? coc#pum#next(1) : "<TAB>"]], opts)
-keymap("i", "<M-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
-keymap("i", "<space>", [[coc#pum#visible() ? coc#pum#confirm() : "\<space>"]], opts)
-keymap("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], opts)
 local mappings = {
   -- Explorer
   { 'n', '<C-h>', ':NvimTreeToggle <CR>', nl},
@@ -111,7 +124,7 @@ local mappings = {
 }
 
 for _, mapping in ipairs(mappings) do
-  keymap(mapping[1], mapping[2], mapping[3], nl)
+  map(mapping[1], mapping[2], mapping[3], nl)
 end
 
 -- Plugins ====================================================================
@@ -140,7 +153,7 @@ require('onedark').setup  {
   transparent = false,  -- Show/hide background
   term_colors = true, -- Change terminal color as per the selected theme style
   ending_tildes = true, -- Show the end-of-buffer tildes. By default they are hidden
-  cmp_itemkind_reverse = true, -- reverse item kind highlights in cmp menu
+  cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
 
   -- Change code style ---
   -- Options are italic, bold, underline, none
@@ -290,8 +303,6 @@ require'nvim-treesitter.configs'.setup {
   additional_vim_regex_highlighting = false,
 }
 
---------------------------------------------------------------------- Autopairs
-require('nvim-autopairs').setup()
 -------------------------------------------------------------------- Comentario
 require('Comment').setup()
 ------------------------------------------------------------------------ Nvterm
@@ -301,28 +312,18 @@ require("nvterm").setup()
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- empty setup using defaults
--- git:unstaged = "✗", staged = "✓", unmerged = "", renamed = "➜", untracked = "★", deleted = "", ignored = "◌"
-require("nvim-tree").setup()
-
 -- OR setup with some options
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
-  view = {
-    adaptive_size = true,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-      },
-    },
-  },
-
-  renderer = {
-    group_empty = true,
-  },
-
   filters = {
     dotfiles = true,
+  },
+
+  view = {
+    adaptive_size = true,
+    side = "left",
+    width = 25,
+    hide_root_folder = true,
   },
 
   log = {
@@ -335,13 +336,231 @@ require("nvim-tree").setup({
       watcher = true,
     },
   },
+
+  renderer = {
+    group_empty = true,
+    icons = {
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+      },
+
+      glyphs = {
+        default = "",
+        symlink = "",
+        folder = {
+          default = "",
+          empty = "",
+          empty_open = "",
+          open = "",
+          symlink = "",
+          symlink_open = "",
+          arrow_open = "",
+          arrow_closed = "",
+        },
+
+        git = {
+          unstaged = "✗",
+          staged = "✓",
+          unmerged = "",
+          renamed = "➜",
+          untracked = "★",
+          deleted = "",
+          ignored = "◌",
+        },
+      },
+    },
+  },
+})
+
+------------------------------------------------------------------------- Pears
+require "pears".setup()
+--------------------------------------------------------------------------PKind
+local lspkind = require('lspkind')
+
+lspkind.init({
+  -- with_text = true,
+  mode = 'symbol_text',
+  preset = 'codicons',
+  symbol_map = {
+    Text        =  "",
+    Method      =  "ƒ",
+    Function    =  "",
+    Constructor =  "",
+    Field       =  "",
+    Variable    =  "",
+    Class       =  "",
+    Interface   =  "",
+    Module      =  "",
+    Property    =  "",
+    Unit        =  "",
+    Value       =  "",
+    Enum        =  "",
+    Keyword     =  "",
+    Snippet     =  "",
+    Color       =  "",
+    File        =  "",
+    Reference   =  "",
+    Folder      =  "",
+    EnumMember  =  "",
+    Constant    =  "",
+    Struct      =  "",
+    Event       =  "",
+    Operator    =  "",
+    TypeParameter = "<>",
+  },
+})
+
+--------------------------------------------------------------------------- CMP
+vim.o.completeopt = "menu,menuone,noselect"
+require('luasnip.loaders.from_vscode').lazy_load()
+-- Set up nvim-cmp.
+local cmp = require'cmp'
+local luasnip = require('luasnip')
+local select_opts = {behavior = cmp.SelectBehavior.Select}
+cmp.setup({
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+       luasnip.lsp_expand(args.body) -- For `vsnip` users.
+      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
+  },
+
+  window = {
+      -- documentation = cmp.config.window.bordered()
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    completion = {
+      -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+      col_offset = -3,
+      side_padding = 0,
+    },
+  },
+  formatting = {
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, vim_item)
+      local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+      local strings = vim.split(kind.kind, "%s", { trimempty = true })
+      kind.kind = " " .. strings[1] .. " "
+      kind.menu = "    (" .. strings[2] .. ")"
+
+      return kind
+    end,
+  },
+ -- formatting = {
+ --    format = lspkind.cmp_format({
+ --      -- Don't write the type of completion, just show the icon
+ --     with_text = false,
+ --     maxwidth = 50,
+ --      -- Show the completion source
+ --     menu = {
+ --       buffer = '[BUF]',
+ --       nvim_lsp = '[LSP]',
+ --       nvim_lua = '[API]',
+ --       path = '[PATH]',
+ --       luasnip = '[SNIP]',
+ --     },
+ --   })
+ -- },
+
+  mapping = cmp.mapping.preset.insert({
+    ['<Up>'] = cmp.mapping.select_prev_item(select_opts),
+    ['<Down>'] = cmp.mapping.select_next_item(select_opts),
+    ['<C-p>'] = cmp.mapping.select_prev_item(select_opts),
+    ['<C-n>'] = cmp.mapping.select_next_item(select_opts),
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({select = false}),
+    ['<C-d>'] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(1) then
+        luasnip.jump(1)
+      else
+        fallback()
+      end
+    end, {'i', 's'}),
+
+    ['<C-b>'] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, {'i', 's'}),
+
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      local col = vim.fn.col('.') - 1
+
+      if cmp.visible() then
+        cmp.select_next_item(select_opts)
+      elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+        fallback()
+      else
+        cmp.complete()
+      end
+    end, {'i', 's'}),
+
+    ['<A-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item(select_opts)
+      else
+        fallback()
+      end
+    end, {'i', 's'}),
+  }),
+
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' }, -- For vsnip users.
+    { name = 'luasnip' }, -- For luasnip users.
+    { name = 'friendly-snippets'},
+    { name = 'vim-react-snippets'}, -- For React
+    -- { name = 'ultisnips' }, -- For ultisnips users.
+    -- { name = 'snippy' }, -- For snippy users.
+  }, {
+      { name = 'buffer' },
+    })
+})
+
+-- Set configuration for specific filetype.
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+  }, {
+      { name = 'buffer' },
+    })
+})
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+      { name = 'cmdline' }
+    })
 })
 
 ------------------------------------------------------ LSPs with default setup:
 local lspconfig = require('lspconfig')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local servers = {
   'bashls',-- bashls (Bash)
   'cssls', -- cssls (CSS)
+  'emmet-ls', -- emmet_ls (HTML)
   'html', -- html (HTML)
   'clangd', -- clangd (C/C++)
   'jsonls',-- jsonls (JSON)
@@ -355,6 +574,7 @@ local servers = {
 for _, lsp in ipairs(servers)  do
   lspconfig[lsp].setup {
     -- on_attach = on_attach,
+    capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
     }
@@ -371,6 +591,21 @@ lspconfig.sumneko_lua.setup {
   },
 }
 
+lspconfig.emmet_ls.setup({
+    -- on_attach = on_attach,
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
+    filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+    init_options = {
+      html = {
+        options = {
+          -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+          ["bem.enabled"] = true,
+        },
+      },
+    }
+})
+
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- Diagnostics symbols for display in the sign column.
 local signs = { Error = "", Warn = "", Hint = "", Info = "" }
 

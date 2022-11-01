@@ -269,10 +269,10 @@ ex: **`.class#id>h1{texto}+p.class-${mais texto}*2>p.class-${mais texto}*2`**
 </div>
 ```
 
-## Nvtree 
+## Nvtree
 
 ```
-HELP g? : toggle_help
+ HELP g? : toggle_help
    bmv : bulk_move
  <C-]> : cd
 <2-RightMouse> : cd
@@ -287,7 +287,6 @@ HELP g? : toggle_help
      a : create
      x : cut
      - : dir_up
-     u : dir_up
   <CR> : edit
      o : edit
 <2-LeftMouse> : edit
