@@ -1,22 +1,25 @@
+-- Plugins ====================================================================
 local use = require('packer').use
 
 require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
 
   use 'lewis6991/impatient.nvim'
+
   use 'navarasu/onedark.nvim'
   use 'Mofiqul/dracula.nvim'
-  use 'lukas-reineke/headlines.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
-  use 'kyazdani42/nvim-web-devicons'
   use 'p00f/nvim-ts-rainbow'
+  use 'kyazdani42/nvim-web-devicons'
+
+  use "steelsojka/pears.nvim"
   use 'AndrewRadev/tagalong.vim'
   use 'airblade/vim-gitgutter'
-  use 'neovim/nvim-lspconfig'
+  use 'sheerun/vim-polyglot'
 
-  use "mortepau/codicons.nvim"
-  use "steelsojka/pears.nvim"
-  use "onsails/lspkind.nvim"
+  use 'neovim/nvim-lspconfig'
+  use 'williamboman/nvim-lsp-installer'
+  use { "williamboman/mason.nvim" }
   use "rafamadriz/friendly-snippets"
   -- Installation
   use { 'L3MON4D3/LuaSnip' }
@@ -31,15 +34,12 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
   use 'mlaursen/vim-react-snippets'
--- For luasnip users.
--- use 'L3MON4D3/LuaSnip'
--- use 'saadparwaiz1/cmp_luasnip'
--- For ultisnips users.
--- use 'SirVer/ultisnips'
--- use 'quangnguyen30192/cmp-nvim-ultisnips'
--- For snippy users.
--- use 'dcampos/nvim-snippy'
--- use 'dcampos/cmp-snippy'
+
+  -- use ({
+  --   'neoclide/coc.nvim',
+  --   branch = 'release'
+  -- })
+
   use ({
     'nvim-tree/nvim-tree.lua',
     requires = {
@@ -83,11 +83,6 @@ require('packer').startup(function()
       require('Comment').setup()
     end
   })
-
-  -- use ({
-  --   'neoclide/coc.nvim',
-  --   branch = 'release'
-  -- })
 
   use ({
     'NvChad/nvterm',
