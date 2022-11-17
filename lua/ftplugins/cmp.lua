@@ -1,4 +1,4 @@
--- Settings plugs =============================================================
+--| Settings plugs |============================================================
 --------------------------------------------------------------------------- CMP
 vim.o.completeopt = "menu,menuone,noselect"
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -92,8 +92,6 @@ cmp.setup({
 		end,
 	},
 
-
-
 	mapping = {
 		["<C-n>"] = cmp.mapping.select_next_item({ Insert_opts }),
 		["<C-p>"] = cmp.mapping.select_prev_item({ Insert_opts }),
@@ -114,6 +112,7 @@ cmp.setup({
 				fallback()
 			end
 		end,
+
 		["<A-Tab>"] = function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()

@@ -1,4 +1,4 @@
--- Settings plugs =============================================================
+--| Settings plugs |============================================================
 -------------------------------------------------------------------- Bufferline
 require("bufferline").setup({
 	options = {
@@ -15,7 +15,7 @@ require("bufferline").setup({
 		tab_size = 21,
 		diagnostics = false, -- | "nvim_lsp" | "coc",
 		diagnostics_update_in_insert = false,
-		-- offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+		offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
 		show_buffer_icons = true,
 		show_buffer_close_icons = true,
 		show_close_icon = true,
