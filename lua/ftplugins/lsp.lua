@@ -66,7 +66,7 @@ lspconfig.emmet_ls.setup({
 
 lspconfig.jdtls.setup({
   cmd = {
-    '/usr/bin/java',
+    'java',
     '-javaagent:/home/kairo/.local/share/nvim/lsp_servers/jdtls/lombok.jar',
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',

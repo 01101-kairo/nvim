@@ -28,8 +28,11 @@ require('packer').startup(function()
     { 'akinsho/toggleterm.nvim', tag = 'v2.*'},
     { 'iamcco/markdown-preview.nvim', run = function()vim.fn["mkdp#util#install"]()end,},
     -- LSP
-    'williamboman/nvim-lsp-installer',
     'williamboman/mason.nvim',
+    'williamboman/nvim-lsp-installer',
+    'jose-elias-alvarez/null-ls.nvim',
+    'jayp0521/mason-null-ls.nvim',
+    'mfussenegger/nvim-dap',
     'rafamadriz/friendly-snippets',
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
@@ -43,9 +46,6 @@ require('packer').startup(function()
     'hrsh7th/vim-vsnip',
     'honza/vim-snippets',
     'mlaursen/vim-react-snippets',
-    'jose-elias-alvarez/null-ls.nvim',
-    'mfussenegger/nvim-dap',
-
     'puremourning/vimspector',
     'mfussenegger/nvim-jdtls',
     'artur-shaik/jc.nvim',

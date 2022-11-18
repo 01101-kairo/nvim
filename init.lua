@@ -11,7 +11,8 @@ require "ftplugins.lualine" ------------------------------------------ lualine
 
 require "ftplugins.cmp" -------------------------------------------------- CMP
 require "ftplugins.lsp" -------------------------------------------------- LSP
-require('jc').setup{}
+require('jc').setup{} --------------------------------------------------- Java
+
 require "nvim-tree".setup() ----------------------------------------- Explorer
 require "toggleterm".setup() -------------------------------------- toggleterm
 require "pears".setup()------------------------------------------------- Pears
