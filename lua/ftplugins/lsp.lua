@@ -98,3 +98,4 @@ for type, icon in pairs(signs) do
 end
 
 vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
+require('jc').setup{}

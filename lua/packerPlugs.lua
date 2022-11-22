@@ -10,7 +10,6 @@ require('packer').startup(function()
     'lewis6991/impatient.nvim',
     -- Aparencia
     'navarasu/onedark.nvim',
-    'Mofiqul/dracula.nvim',
     'lukas-reineke/indent-blankline.nvim',
     'p00f/nvim-ts-rainbow',
     'kyazdani42/nvim-web-devicons',
@@ -30,9 +29,8 @@ require('packer').startup(function()
     -- LSP
     'williamboman/mason.nvim',
     'williamboman/nvim-lsp-installer',
-    'jose-elias-alvarez/null-ls.nvim',
-    'jayp0521/mason-null-ls.nvim',
-    'mfussenegger/nvim-dap',
+    -- 'jose-elias-alvarez/null-ls.nvim',
+    -- 'mfussenegger/nvim-dap',
     'rafamadriz/friendly-snippets',
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
