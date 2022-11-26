@@ -20,7 +20,7 @@ require "Comment".setup()------------------------------------------ Comentario
 --| Keymap |====================================================================
 ---------------------------------------------------------- Settings Neovim Lua
 vim.api.nvim_command('autocmd TermEnter term://*toggleterm#* tnoremap <silent><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>')
-local ops = { noremap = true, silent = true }
+local opts = { noremap = true, silent = true }
 for _, mapping in ipairs({
   { '<F5>',  [[:TermExec cmd="run %" direction=float<CR>]] },         -- Run cod
   { '<C-t>', [[:exe v:count1 . "ToggleTerm direction=float"<CR>]] },  -- Terminal
@@ -37,8 +37,32 @@ for _, mapping in ipairs({
   { '<C-j>', [[<C-w>j]] },
   { '<C-k>', [[<C-w>k]] },
 })
-  do vim.keymap.set('n', mapping[1], mapping[2], ops)
+  do vim.keymap.set('n', mapping[1], mapping[2], opts)
 end
+
+--[[ vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ji", "<cmd>lua require('jc.jdtls').organize_imports(true)<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>jI", "<cmd>lua require('jc.jdtls').organize_imports(false)<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-j>i", "<cmd>lua require('jc.jdtls').organize_imports()<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>jts", "<cmd>lua require('jc.jdtls').generate_toString()<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>jeq", "<cmd>lua require('jc.jdtls').generate_hashCodeAndEquals()<CR>", opts)
+
+vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>jA", "<cmd>lua require('jc.jdtls').generate_accessors()<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>js", "<cmd>lua require('jc.jdtls').generate_accessor('s')<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>jg", "<cmd>lua require('jc.jdtls').generate_accessor('g')<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ja", "<cmd>lua require('jc.jdtls').generate_accessor('gs')<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-j>s", "<cmd>lua require('jc.jdtls').generate_accessor('s')<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-j>g", "<cmd>lua require('jc.jdtls').generate_accessor('g')<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-j>a", "<cmd>lua require('jc.jdtls').generate_accessor('sg')<CR>", opts)
+
+vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>jc", "<cmd>lua require('jc.jdtls').generate_constructor(nil, nil, {default = false})<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>jcc", "<cmd>lua require('jc.jdtls').generate_constructor(nil, nil, {default = true})<CR>", opts)
+
+vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>jam", "<cmd>lua require('jc.jdtls').generate_abstractMethods()<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-j>am", "<cmd>lua require('jc.jdtls').generate_abstractMethods()<CR>", opts)
+-- using `jdtls`
+vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>jre", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>jre", "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
+vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>jrm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts) ]]
 
 --| Settings |==================================================================
 ---------------------------------------------------------- Settings Neovim Lua
@@ -65,29 +89,29 @@ set.shiftwidth = 2              -- when indenting with '>', use 2 spaces width
 
 set.expandtab = true            -- On pressing tab, insert 4 spaces
 
-set.fillchars = { eob = " " }
-set.ignorecase = true
-set.smartcase = true
+set.fillchars = { eob = " " }   --
+set.ignorecase = true           --
+set.smartcase = true            --
 -- set.mouse = "a"              -- isso memo mouse no vim hooooo
 
 -- Numbers
 set.number = true               -- só pra eu saber qual linha eu to
-set.numberwidth = 2
-set.ruler = false
+set.numberwidth = 2             --
+set.ruler = false               --
 
 -- disable nvim intro
-set.shortmess:append("sI")
+set.shortmess:append("sI")      --
 
-set.signcolumn = "yes"
+set.signcolumn = "yes"          --
 set.splitbelow = true           -- Create the horizontal splits below
 set.splitright = true           -- Create the vertical splits to the right
-set.timeoutlen = 400
-set.undofile = true
+set.timeoutlen = 400            --
+set.undofile = true             --
 
-set.scrolloff = 8
-set.cmdheight = 2
-set.list = true
-set.hidden = true
+set.scrolloff = 8               --
+set.cmdheight = 2               --
+set.list = true                 --
+set.hidden = true               --
 set.cindent = true              -- indentação no estilo C
 set.cursorline = true           -- ondiéqueeuto
 set.sm = true                   -- mostra o início do bloco que acabou de ser fechado, sm é o mesmo que ShowMatch

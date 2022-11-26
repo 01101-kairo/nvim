@@ -195,9 +195,9 @@ n localisa a próxima N anterior  * sobo
 R inserção sobreescrevendo
 ```
 
-## ESC_manipulação_de_texto
+# ESC_manipulação_de_texto
 
-### Copia
+## Copia
 
 ```
 y copia oque esta sobre o curso
@@ -208,7 +208,7 @@ y2j copia mais duas linhas pra baicho
 "+y copia para a área de transferencia
 ```
 
-### Cola
+## Cola
 
 ```
 p cola
@@ -216,7 +216,7 @@ p cola
 "+gp cola da area detranferencia
 ```
 
-### Recorta
+## Recorta
 
 ```
 x recorta sob o cursor X antes do cursor
@@ -233,13 +233,13 @@ d+ recorta da reposição atual
 5db apaga 5 palavras para trás da reposição do cursor
 ```
 
-### Junta
+## Junta
 
 ```
 J junta duas linhas
 ```
 
-## vim-emmet
+# vim-emmet
 
 **`>filho`**
 **`.class`**
@@ -269,7 +269,7 @@ ex: **`.class#id>h1{texto}+p.class-${mais texto}*2>p.class-${mais texto}*2`**
 </div>
 ```
 
-## Nvtree
+# Nvtree
 
 ```
  HELP g? : toggle_help
@@ -327,7 +327,6 @@ ex: **`.class#id>h1{texto}+p.class-${mais texto}*2>p.class-${mais texto}*2`**
 # muti-curso
 
 ```
-
 selecione palavras com Ctrl-N (como Ctrl-d em Sublime Text/VS Code)
 crie cursores verticalmente com Ctrl-Down/Ctrl-Up
 selecione um caractere de cada vez com Shift-Setas
@@ -338,6 +337,32 @@ pressione Q para remover o cursor/seleção atual
 inicie o modo de inserção com i,a,I,A
 
 ```
+
+## Commands
+- `JCdebugAttach` – inicia a sessão de depuração com o vimspector anexado à porta de depuração;
+- `JCdebugLaunch` – inicia a sessão de depuração com o vimspector executando a classe principal;
+- `JCdebugWithConfig` – inicia a sessão de depuração usando a configuração predefinida do vimspector;
+- `JCimportsOrganizeSmart` – organiza automaticamente as importações usando a lista de classes regular;
+- `JCimportsOrganize` – organiza automaticamente as importações escolhendo a partir da lista de classes disponíveis;
+- `JCgenerateToString` – escolha campos e método para gerar `toString`;
+- `JCgenerateHashCodeAndEquals` – escolha os campos para gerar `hashCode` e `equals`;
+- `JCgenerateAccessors` – escolha dos campos para geração dos acessadores;
+- `JCgenerateAccessorGetter` – gera getter para um campo;
+- `JCgenerateAccessorSetter` – gera setter para um campo;
+- `JCgenerateAccessorSetterGetter` – gera getter e setter para um campo;
+- `JCgenerateConstructorDefault` – gera construtor sem argumentos;
+- `JCgenerateConstructor` – escolha os campos para o construtor;
+- `JCgenerateAbstractMethods` – gera métodos abstratos;
+- `JCgenerateClass` – inicia o prompt de entrada do usuário para geração de classes;
+- `JCtoggleAutoformat` – habilitar/desabilitar arquivo de autoformatação ao salvar;
+Usando `nvim-jdtls`:
+
+- `JCrefactorExtractVar` – variável de extração;
+- `JCrefactorExtractMethod` – método de extração;
+- `JCutilJshell` – executa shell java;
+- `JCutilBytecode` – extrair bytecode para classe;
+- `JCutilJol` – analisa o esquema de layout do objeto usando `jol.jar`;
+- `JCutilUpdateConfig` – atualiza a configuração do projeto atual.
 
 <p style="display: inline_block">
     <img alt="Vim" src="Vim.png" height="75" width="100" alt="logo do vim">
